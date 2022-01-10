@@ -1,11 +1,16 @@
 CMakeCache.txt
 CMakeFiles/*
 Makefile
+
 builds/cmake/chip8
+builds/cmake/chip8-test
 builds/cmake/cmake_install.cmake
 builds/cmake/CMakeFiles/
-cmake_install.cmake/chip8
+builds/cmake/lib/
+
 builds/vs/Debug/
 builds/vs/Release/
 builds/vs/x64/
 builds/vs/.vs/
+builds/vs/packages/
+cmake_install.cmake/chip8

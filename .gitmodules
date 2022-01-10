@@ -1,0 +1,4 @@
+[submodule "builds/cmake/gtest"]
+	path = builds/cmake/gtest
+	url = https://github.com/google/googletest/
+	ignore = dirty
