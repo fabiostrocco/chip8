@@ -1,5 +1,4 @@
 #include "CommandLineOptions.hpp"
-#include "IFIeld.hpp"
 
 void clparser::CommandLineOptions::addField(clparser::IField& field)
 {
