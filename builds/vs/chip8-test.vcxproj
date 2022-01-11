@@ -34,9 +34,45 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <TestDir>..\..\test\</TestDir>
+    <SrcDir>..\..\src\</SrcDir>
+    <CommandLineParserDir>$(SrcDir)\clparser\</CommandLineParserDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PublicIncludeDirectories>
+    </PublicIncludeDirectories>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PublicIncludeDirectories>
+    </PublicIncludeDirectories>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PublicIncludeDirectories>
+    </PublicIncludeDirectories>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PublicIncludeDirectories>
+    </PublicIncludeDirectories>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="$(TestDir)Test.cpp" />
+    <ClCompile Include="$(TestDir)CommandLineParserTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(CommandLineParserDir)CommandLineOptions.cpp" />
+    <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)CommandLineOptions.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)Field.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)IField.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)Required.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)Optional.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\vs\chip8.vcxproj">
@@ -62,6 +98,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeaderOutputFile />
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -79,6 +116,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeaderOutputFile />
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -95,6 +133,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PrecompiledHeaderOutputFile />
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -113,6 +152,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PrecompiledHeaderOutputFile />
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -120,7 +160,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Questo progetto fa riferimento a uno o più pacchetti NuGet che non sono presenti in questo computer. Usare lo strumento di ripristino dei pacchetti NuGet per scaricarli. Per altre informazioni, vedere http://go.microsoft.com/fwlink/?LinkID=322105. Il file mancante è {0}.</ErrorText>

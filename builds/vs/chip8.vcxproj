@@ -96,6 +96,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -111,6 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,6 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,6 +144,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,31 +156,31 @@
   </ItemDefinitionGroup>
   <PropertyGroup>
     <SrcDir>..\..\src\</SrcDir>
+    <CommandLineParserDir>$(SrcDir)\clparser\</CommandLineParserDir>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="$(SrcDir)main.cpp" />
+    <ClCompile Include="$(CommandLineParserDir)CommandLineOptions.cpp" />
+    <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)CommandLineOptions.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)Field.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)IField.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)Required.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)Optional.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
   <Target Name="AfterBuild">
-	<Copy SourceFiles=".\SDL2\lib\x86\SDL2.dll"
-          DestinationFolder="$(SolutionDir)$(Configuration)\"
-		  Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"/>
-		  
-   	<Copy SourceFiles=".\SDL2\lib\x86\SDL2.dll"
-          DestinationFolder="$(SolutionDir)$(Configuration)\"
-		  Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"/>
-
-   	<Copy SourceFiles=".\SDL2\lib\x64\SDL2.dll"
-          DestinationFolder="$(SolutionDir)$(Platform)\$(Configuration)\"
-		  Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"/>
-
-   	<Copy SourceFiles=".\SDL2\lib\x64\SDL2.dll"
-          DestinationFolder="$(SolutionDir)$(Configuration)\"
-		  Condition="'$(Configuration)|$(Platform)'=='Release|x64'"/>
-
-	<Message Text="Hi" Importance="high" />
+    <Copy SourceFiles=".\SDL2\lib\x86\SDL2.dll" DestinationFolder="$(SolutionDir)$(Configuration)\" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <Copy SourceFiles=".\SDL2\lib\x86\SDL2.dll" DestinationFolder="$(SolutionDir)$(Configuration)\" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <Copy SourceFiles=".\SDL2\lib\x64\SDL2.dll" DestinationFolder="$(SolutionDir)$(Platform)\$(Configuration)\" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <Copy SourceFiles=".\SDL2\lib\x64\SDL2.dll" DestinationFolder="$(SolutionDir)$(Configuration)\" Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <Message Text="Hi" Importance="high" />
   </Target>
 </Project>

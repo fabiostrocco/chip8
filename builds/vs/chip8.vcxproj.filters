@@ -2,5 +2,42 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="$(SrcDir)main.cpp" />
+    <ClCompile Include="$(CommandLineParserDir)CommandLineOptions.cpp">
+      <Filter>clparser</Filter>
+    </ClCompile>
+    <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp">
+      <Filter>clparser</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="clparser">
+      <UniqueIdentifier>{498b898e-7468-4e00-ac16-668fa2afd0cc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(CommandLineParserDir)CommandLineOptions.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)Optional.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)Required.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)Field.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)IField.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
