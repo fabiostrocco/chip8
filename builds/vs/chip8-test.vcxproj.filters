@@ -7,12 +7,45 @@
     <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="$(TestDir)CommandLineParserTest.cpp" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-filepath.cc" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-matchers.cc" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-port.cc" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-printers.cc" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-test-part.cc" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-typed-test.cc" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest.cc" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\*.cc" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\*.cc" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\*.cc" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gmock\gmock-all.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\gtest-all.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="$(TestDir)CommandLineParserIntegrationTests.cpp" />
+    <ClCompile Include="$(TestDir)CommandLineParserUnitTests.cpp" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp">
       <Filter>src</Filter>
     </ClInclude>
@@ -22,16 +55,25 @@
     <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)Field.hpp">
+    <ClInclude Include="$(CommandLineParserDir)NamedArgument.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)IField.hpp">
+    <ClInclude Include="$(CommandLineParserDir)Argument.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)Optional.hpp">
+    <ClInclude Include="$(CommandLineParserDir)IArgument.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)Required.hpp">
+    <ClInclude Include="$(CommandLineParserDir)IArgumentVisitor.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)ICommandLineOptions.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)PositionalArgument.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,6 +83,9 @@
   <ItemGroup>
     <Filter Include="src">
       <UniqueIdentifier>{555e733d-834f-41df-8894-ffb206b0db10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gtest">
+      <UniqueIdentifier>{136000cc-bcf9-4f79-900e-b8ef5ee195aa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

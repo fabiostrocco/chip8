@@ -96,7 +96,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -112,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,7 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,7 +144,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -168,10 +168,12 @@
     <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp" />
     <ClInclude Include="$(CommandLineParserDir)CommandLineOptions.hpp" />
     <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)Field.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)IField.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)Required.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)Optional.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)Argument.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)IArgument.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)IArgumentVisitor.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)ICommandLineOptions.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)NamedArgument.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)PositionalArgument.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

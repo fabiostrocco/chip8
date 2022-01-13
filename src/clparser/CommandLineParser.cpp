@@ -9,3 +9,11 @@ clparser::CommandLineParser::CommandLineParser(int argc, char** argv)
 		arguments.emplace_back(argv[i]);
 	}
 }
+
+void clparser::CommandLineParser::parse(clparser::CommandLineOptions& options)
+{
+	for (auto argumentDescriptor : options.getArguments())
+	{
+		argumentDescriptor->match(arguments);
+	}
+}

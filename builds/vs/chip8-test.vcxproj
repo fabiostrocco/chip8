@@ -40,25 +40,29 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
+    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
+    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
+    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
+    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="$(TestDir)CommandLineParserTest.cpp" />
+    <ClCompile Include="$(TestDir)CommandLineParserUnitTests.cpp" />
+    <ClCompile Include="$(TestDir)CommandLineParserIntegrationTests.cpp" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\gtest-all.cc" />
+	<ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc" />
+	<ClCompile Include="packages\gmock.1.11.0\lib\native\src\gmock\gmock-all.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(CommandLineParserDir)CommandLineOptions.cpp" />
@@ -69,10 +73,12 @@
     <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp" />
     <ClInclude Include="$(CommandLineParserDir)CommandLineOptions.hpp" />
     <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)Field.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)IField.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)Required.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)Optional.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)Argument.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)IArgument.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)IArgumentVisitor.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)ICommandLineOptions.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)NamedArgument.hpp" />
+    <ClInclude Include="$(CommandLineParserDir)PositionalArgument.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\vs\chip8.vcxproj">
@@ -84,9 +90,6 @@
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\vs\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.5\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets" Condition="Exists('..\vs\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.5\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" />
-  </ImportGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -98,7 +101,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeaderOutputFile />
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -116,7 +119,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeaderOutputFile />
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -133,7 +136,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PrecompiledHeaderOutputFile />
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -152,7 +155,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PrecompiledHeaderOutputFile />
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -165,6 +168,5 @@
     <PropertyGroup>
       <ErrorText>Questo progetto fa riferimento a uno o più pacchetti NuGet che non sono presenti in questo computer. Usare lo strumento di ripristino dei pacchetti NuGet per scaricarli. Per altre informazioni, vedere http://go.microsoft.com/fwlink/?LinkID=322105. Il file mancante è {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\vs\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.5\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\vs\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.5\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets'))" />
   </Target>
 </Project>

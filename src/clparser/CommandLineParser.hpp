@@ -3,25 +3,20 @@
 #include <string>
 #include <vector>
 
+#include "CommandLineOptions.hpp"
+
+#include <type_traits>
+#include <utility>
+#include <iostream>
+#include <sstream>
+
 namespace clparser
 {
 	class CommandLineParser
 	{
 	public:
 		CommandLineParser(int argc, char** argv);
-
-		template<typename Options>
-		Options parse()
-		{
-			// TODO: Option <: COmmandLineOptions
-			Options options;
-			for (auto field : options.getFields())
-			{
-				field->match(arguments);
-			}
-
-			return options;
-		}
+		void parse(clparser::CommandLineOptions& options);
 
 	private:
 		std::vector<std::string> arguments;

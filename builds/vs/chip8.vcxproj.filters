@@ -21,22 +21,28 @@
     <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp">
       <Filter>clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)Optional.hpp">
-      <Filter>clparser</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)Required.hpp">
-      <Filter>clparser</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)Field.hpp">
-      <Filter>clparser</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)IField.hpp">
-      <Filter>clparser</Filter>
-    </ClInclude>
     <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp">
       <Filter>clparser</Filter>
     </ClInclude>
     <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)ICommandLineOptions.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)Argument.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)IArgument.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)NamedArgument.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)PositionalArgument.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)IArgumentVisitor.hpp">
       <Filter>clparser</Filter>
     </ClInclude>
   </ItemGroup>
