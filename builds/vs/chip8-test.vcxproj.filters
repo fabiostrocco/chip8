@@ -16,8 +16,6 @@
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest.cc" />
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc" />
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\*.cc" />
-    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\*.cc" />
-    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\*.cc" />
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gmock\gmock-all.cc">
       <Filter>gtest</Filter>
     </ClCompile>
@@ -38,6 +36,12 @@
     </ClCompile>
     <ClCompile Include="$(TestDir)CommandLineParserIntegrationTests.cpp" />
     <ClCompile Include="$(TestDir)CommandLineParserUnitTests.cpp" />
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc">
       <Filter>gtest</Filter>
     </ClCompile>

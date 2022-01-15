@@ -1,161 +1,147 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <type_traits>
-#include <sstream>
 #include <optional>
+#include <sstream>
+#include <string>
+#include <type_traits>
+#include <vector>
 
-#include "ICommandLineOptions.hpp"
-#include "IArgument.hpp"
+#include "ArgumentConcept.hpp"
 #include "ArgumentFormatException.hpp"
 #include "ArgumentNotFoundException.hpp"
-
-namespace
-{
-	template<typename S, typename T>
-	class is_streamable
-	{
-		template<typename SS, typename TT>
-		static auto test(int)
-			-> decltype(std::declval<SS&>() << std::declval<TT>(), std::true_type()) {}
-
-		template<typename, typename>
-		static auto test(...)->std::false_type {}
-
-	public:
-		static const bool value = decltype(test<S, T>(0))::value;
-	};
-}
+#include "IArgument.hpp"
+#include "ICommandLineOptions.hpp"
 
 namespace clparser
 {
-	template <class ValueType>
-	concept IsStreammable = is_streamable<std::stringstream, ValueType>::value;
+    template <clparser::ArgumentConcept ArgumentType>
+    class Argument : public clparser::IArgument
+    {
+      protected:
+        Argument(clparser::ICommandLineOptions& options,
+                 std::optional<ArgumentType> defaultValue) requires(!std::is_same<ArgumentType, bool>::value)
+            : storage(std::nullopt)
+            , defaultValue(defaultValue)
+            , index(options.getArguments().size())
+        {
+        }
 
-	template <typename ArgumentType>
-		requires IsStreammable<ArgumentType>
-	class Argument : public clparser::IArgument
-	{
-	protected:
-		Argument(clparser::ICommandLineOptions& options, std::optional<ArgumentType> defaultValue) :
-			storage(),
-			defaultValue(defaultValue),
-			initialized(false),
-			index(options.getArguments().size())
-		{
-		}
+        Argument(clparser::ICommandLineOptions& options) requires(std::is_same<ArgumentType, bool>::value)
+            : storage(std::nullopt)
+            , defaultValue(std::nullopt)
+            , index(options.getArguments().size())
+        {
+        }
 
-		virtual void internalMatch(const std::vector<std::string>& arguments) = 0;
+        virtual void internalMatch(const std::vector<std::string>& arguments) = 0;
 
-	public:
-		void match(const std::vector<std::string>& arguments) override
-		{
-			initialized = false;
+      public:
+        void match(const std::vector<std::string>& arguments) override
+        {
+            storage = std::nullopt;
 
-			try
-			{
-				internalMatch(arguments);
-			}
-			catch (ArgumentNotFoundException& e)
-			{
-				if (defaultValue.has_value())
-				{
-					setStorage(*defaultValue);
-				}
-				else
-				{
-					throw e;
-				}
-			}
+            try
+            {
+                internalMatch(arguments);
+            }
+            catch (ArgumentNotFoundException& e)
+            {
+                if (defaultValue.has_value())
+                {
+                    setStorage(*defaultValue);
+                }
+                else
+                {
+                    throw e;
+                }
+            }
 
-			// If internalMatch terminates without exception, storage must be initialized.
-			if (!initialized)
-			{
-				throw std::logic_error("Uninitialized successfully matched field: setStorage() must be called when a field is sucecssfully matched");
-			}
-		}
+            // If internalMatch terminates without exception, storage must be initialized.
+            if (!storage.has_value())
+            {
+                throw std::logic_error(
+                    "Uninitialized successfully matched field: setStorage() must be called when a field is sucecssfully matched");
+            }
+        }
 
-		ArgumentType operator()() const
-		{
-			if (!initialized)
-			{
-				throw std::logic_error("Unanitialized field");
-			}
+        ArgumentType operator()() const
+        {
+            if (!storage.has_value())
+            {
+                throw std::logic_error("Unanitialized field");
+            }
 
-			return storage;
-		}
+            return *storage;
+        }
 
-	protected:
-		void setStorage(const ArgumentType& value)
-		{
-			storage = value;
-			initialized = true;
-		}
+      protected:
+        void setStorage(const ArgumentType& value)
+        {
+            storage = value;
+        }
 
-		size_t getIndex()
-		{
-			return index;
-		}
+        size_t getIndex()
+        {
+            return index;
+        }
 
-		std::optional<ArgumentType> getDefaultValue()
-		{
-			return defaultValue;
-		}
+        std::optional<ArgumentType> getDefaultValue()
+        {
+            return defaultValue;
+        }
 
-		std::optional<std::string> getDefaultValueString()
-		{
-			auto defaultValue = getDefaultValue();
-			std::optional<std::string> defaultValueString;
-			if (defaultValue.has_value())
-			{
-				if constexpr (std::is_same<ArgumentType, std::string>::value)
-				{
-					defaultValueString = *defaultValue;
-				}
-				else
-				{
-					defaultValueString = std::to_string(*defaultValue);
-				}
-			}
-			else
-			{
-				defaultValueString = std::nullopt;
-			}
+        std::optional<std::string> getDefaultValueString()
+        {
+            auto defaultValue = getDefaultValue();
+            std::optional<std::string> defaultValueString;
+            if (defaultValue.has_value())
+            {
+                if constexpr (std::is_same<ArgumentType, std::string>::value)
+                {
+                    defaultValueString = *defaultValue;
+                }
+                else
+                {
+                    defaultValueString = std::to_string(*defaultValue);
+                }
+            }
+            else
+            {
+                defaultValueString = std::nullopt;
+            }
 
-			return defaultValueString;
-		}
+            return defaultValueString;
+        }
 
-	private:
-		Argument<ArgumentType>(const Argument<ArgumentType>&) = delete;
-		Argument<ArgumentType>& operator= (const Argument<ArgumentType>&) = delete;
+      private:
+        Argument<ArgumentType>(const Argument<ArgumentType>&) = delete;
+        Argument<ArgumentType>& operator=(const Argument<ArgumentType>&) = delete;
 
-	private:
-		bool initialized;
-		ArgumentType storage;
-		std::optional<ArgumentType> defaultValue;
-		size_t index;
-	};
+      private:
+        std::optional<ArgumentType> storage;
+        std::optional<ArgumentType> defaultValue;
+        size_t index;
+    };
 
-	static constexpr char ShortNamePrefix[] = "-";
-	static constexpr char LongNamePrefix[] = "--";
+    static constexpr char ShortNamePrefix[] = "-";
+    static constexpr char LongNamePrefix[] = "--";
 
-	template <typename ArgumentType>
-	std::optional<ArgumentType> required()
-	{
-		return {};
-	}
+    template <typename ArgumentType>
+    std::optional<ArgumentType> required()
+    {
+        return {};
+    }
 
-	template <typename ArgumentType>
-	std::optional<ArgumentType> optional(const ArgumentType& value)
-	{
-		return value;
-	}
+    template <typename ArgumentType>
+    std::optional<ArgumentType> optional(const ArgumentType& value)
+    {
+        return value;
+    }
 
-	static bool isArgumentName(const std::string& text)
-	{
-		std::stringstream ss(text);
-		double buf;
-		return !(ss >> buf) && (text.starts_with(ShortNamePrefix) || text.starts_with(LongNamePrefix));
-	}
+    static bool isArgumentName(const std::string& text)
+    {
+        std::stringstream ss(text);
+        double buf;
+        return !(ss >> buf) && (text.starts_with(ShortNamePrefix) || text.starts_with(LongNamePrefix));
+    }
 }

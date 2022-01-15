@@ -10,11 +10,22 @@ find_package(SDL2 REQUIRED)
 
 set(CHIP8_SRC "../../src/")
 set(CHIP8_CLPARSER "${CHIP8_SRC}clparser/")
+set(CHIP8_LOGGING "${CHIP8_SRC}logging/")
+set(CHIP8_EMULATOR "${CHIP8_SRC}emulator/")
 
 set(CHIP8_SOURCE_FILES
     "${CHIP8_SRC}main.cpp"
+    "${CHIP8_SRC}Logger.cpp"
+    
     "${CHIP8_CLPARSER}CommandLineOptions.cpp"
-    "${CHIP8_CLPARSER}CommandLineParser.cpp")
+    "${CHIP8_CLPARSER}CommandLineParser.cpp"
+	
+    "${CHIP8_EMULATOR}Cpu.cpp"
+    "${CHIP8_EMULATOR}Emulator.cpp"
+    "${CHIP8_EMULATOR}EmulatorWindow.cpp"
+    "${CHIP8_EMULATOR}Gpu.cpp"
+    "${CHIP8_EMULATOR}Timer.cpp")
+	
 message("compiler=${CMAKE_CXX_COMPILER_ID} version=${CMAKE_CXX_COMPILER_VERSION}")
 
 include_directories(${SDL2_INCLUDE_DIRS} ${CHIP8_SRC})

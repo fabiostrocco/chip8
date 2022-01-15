@@ -6,11 +6,12 @@
 
 namespace clparser
 {
-	class ICommandLineOptions
-	{
-	public:
-		virtual void addArgument(clparser::IArgument& argument) = 0;
-		virtual std::vector<clparser::IArgument*> getArguments() const = 0;
-		virtual std::string getHelpMessage(const std::string& programName) const = 0;
-	};
+    class ICommandLineOptions
+    {
+      public:
+        virtual void addArgument(clparser::IArgument& argument) = 0;
+        virtual std::vector<clparser::IArgument*> getArguments() const = 0;
+        virtual std::string getHelpMessage(const std::string& programName) const = 0;
+        virtual bool matchHelpAndGuides(const std::vector<std::string>& arguments) = 0;
+    };
 }

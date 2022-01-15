@@ -1,30 +1,53 @@
-#include <SDL.h>
+//#include <SDL.h>
 
+#include "CommandLineOptions.hpp"
+#include "ExitCode.hpp"
+#include "Logger.hpp"
+#include "clparser/ArgumentFormatException.hpp"
+#include "clparser/ArgumentNotFoundException.hpp"
 #include "clparser/CommandLineParser.hpp"
-#include "clparser/CommandLineOptions.hpp"
+#include "emulator/Emulator.hpp"
+#include "logging/Severity.hpp"
+#include "metadata.hpp"
 
 int main(int argc, char* argv[])
 {
-	SDL_Init(SDL_INIT_VIDEO);
+    chip8::CommandLineOptions options;
+    clparser::CommandLineParser parser(argc, argv);
+    chip8::Logger logger;
 
-	SDL_Window* window = SDL_CreateWindow(
-		"SDL2Test",
-		SDL_WINDOWPOS_UNDEFINED,
-		SDL_WINDOWPOS_UNDEFINED,
-		640,
-		480,
-		0
-	);
+    try
+    {
+        parser.parse(options);
+        if (options.version())
+        {
+            std::cout << chip8::metadata::ProgramName << " version " << chip8::metadata::Version << std::endl;
+            return chip8::ExitCode::Success;
+        }
 
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
-	SDL_SetRenderDrawColor(renderer, 200, 0, 0, SDL_ALPHA_OPAQUE);
-	SDL_RenderClear(renderer);
-	SDL_RenderPresent(renderer);
+        if (options.help())
+        {
+            std::cout << options.getHelpMessage(chip8::metadata::ProgramName) << std::endl;
+            return chip8::ExitCode::Success;
+        }
 
-	SDL_Delay(3000);
+        logger.setVerbose(options.verbose());
 
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+        chip8::Emulator emulator(logger, options.romName());
+        emulator.run();
+    }
+    catch (clparser::ArgumentNotFoundException& argNotFound)
+    {
+        logger.logError(argNotFound.what());
+        std::cout << options.getHelpMessage(chip8::metadata::ProgramName) << std::endl;
+        return chip8::ExitCode::CommandLineArgsParseError;
+    }
+    catch (clparser::ArgumentFormatException& argWrongFormat)
+    {
+        logger.logError(argWrongFormat.what());
+        std::cout << options.getHelpMessage(chip8::metadata::ProgramName) << std::endl;
+        return chip8::ExitCode::CommandLineArgsParseError;
+    }
 
-	return 0;
+    return 0;
 }

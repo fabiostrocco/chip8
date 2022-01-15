@@ -72,23 +72,27 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>.\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\src;.\SDL2\include;$(IncludePath)</IncludePath>
     <LibraryPath>.\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
+    <PublicIncludeDirectories>$(SrcDir)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>.\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\src;.\SDL2\include;$(IncludePath)</IncludePath>
     <LibraryPath>.\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
+    <PublicIncludeDirectories>$(SrcDir)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>.\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\src;.\SDL2\include;$(IncludePath)</IncludePath>
     <LibraryPath>.\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
+    <PublicIncludeDirectories>$(SrcDir)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>.\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\src;.\SDL2\include;$(IncludePath)</IncludePath>
     <LibraryPath>.\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
+    <PublicIncludeDirectories>$(SrcDir)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -157,13 +161,32 @@
   <PropertyGroup>
     <SrcDir>..\..\src\</SrcDir>
     <CommandLineParserDir>$(SrcDir)\clparser\</CommandLineParserDir>
+    <LoggingDir>$(SrcDir)\logging\</LoggingDir>
+    <EmulatorDir>$(SrcDir)\emulator\</EmulatorDir>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="$(SrcDir)main.cpp" />
+    <ClCompile Include="$(SrcDir)Logger.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="$(CommandLineParserDir)CommandLineOptions.cpp" />
     <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(EmulatorDir)Cpu.cpp" />
+    <ClCompile Include="$(EmulatorDir)Emulator.cpp" />
+    <ClCompile Include="$(EmulatorDir)EmulatorWindow.cpp" />
+    <ClCompile Include="$(EmulatorDir)Gpu.cpp" />
+    <ClCompile Include="$(EmulatorDir)Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SrcDir)Logger.hpp" />
+    <ClInclude Include="$(SrcDir)CommandLineOptions.hpp" />
+    <ClInclude Include="$(SrcDir)ExitCode.hpp" />
+    <ClInclude Include="$(SrcDir)metadata.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(CommandLineParserDir)ArgumentConcept.hpp" />
     <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp" />
     <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp" />
     <ClInclude Include="$(CommandLineParserDir)CommandLineOptions.hpp" />
@@ -174,6 +197,23 @@
     <ClInclude Include="$(CommandLineParserDir)ICommandLineOptions.hpp" />
     <ClInclude Include="$(CommandLineParserDir)NamedArgument.hpp" />
     <ClInclude Include="$(CommandLineParserDir)PositionalArgument.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(LoggingDir)Logger.hpp" />
+    <ClInclude Include="$(LoggingDir)LoggerConcept.hpp" />
+    <ClInclude Include="$(LoggingDir)Severity.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(EmulatorDir)Cpu.hpp" />
+    <ClInclude Include="$(EmulatorDir)Emulator.hpp" />
+    <ClInclude Include="$(EmulatorDir)EmulatorWindow.hpp" />
+    <ClInclude Include="$(EmulatorDir)Gpu.hpp" />
+    <ClInclude Include="$(EmulatorDir)ICpu.hpp" />
+    <ClInclude Include="$(EmulatorDir)IFrameBuffer.hpp" />
+    <ClInclude Include="$(EmulatorDir)IGpu.hpp" />
+	<ClInclude Include="$(EmulatorDir)ITimer.hpp" />
+    <ClInclude Include="$(EmulatorDir)Registers.hpp" />
+    <ClInclude Include="$(EmulatorDir)Timer.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

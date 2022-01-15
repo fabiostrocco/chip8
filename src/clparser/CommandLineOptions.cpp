@@ -6,112 +6,134 @@
 
 void clparser::CommandLineOptions::addArgument(clparser::IArgument& argument)
 {
-	argument.accept(validator);
-	arguments.emplace_back(&argument);
+    argument.accept(validator);
+    arguments.emplace_back(&argument);
 }
 
 std::vector<clparser::IArgument*> clparser::CommandLineOptions::getArguments() const
 {
-	return arguments;
+    return arguments;
 }
 
 std::string clparser::CommandLineOptions::getHelpMessage(const std::string& programName) const
 {
-	HelpMessageBuilder messageBuilder;
-	std::string helpMessage;
-	std::stringstream ss;
+    HelpMessageBuilder messageBuilder;
+    std::string helpMessage;
+    std::stringstream ss;
 
-	for (IArgument* argument : arguments)
-	{
-		argument->accept(messageBuilder);
-	}
+    for (auto argument : arguments)
+    {
+        argument->accept(messageBuilder);
+    }
 
-	ss << "Usage: " << programName << " " << messageBuilder.getArguments() << std::endl;
-	ss << std::endl;
-	ss << "Options" << std::endl;
-	ss << messageBuilder.getOptionGuides() << std::endl;
+    ss << "Usage: " << programName << " " << messageBuilder.getArguments() << std::endl;
+    ss << std::endl;
+    ss << "Options" << std::endl;
+    ss << messageBuilder.getOptionGuides() << std::endl;
 
-	helpMessage = ss.str();
-	return helpMessage;
+    helpMessage = ss.str();
+    return helpMessage;
 }
 
-void clparser::CommandLineOptions::HelpMessageBuilder::visitNamedArgument(
-	const std::string& shortName,
-	const std::string& longName,
-	const std::string& description,
-	const bool isFlag,
-	const std::optional<std::string> defaultValue)
+bool clparser::CommandLineOptions::matchHelpAndGuides(const std::vector<std::string>& arguments)
 {
-	if (defaultValue.has_value())
-	{
-		argumentStream << "[";
-	}
+    bool helpOrVersionFlagIsSet = false;
 
-	argumentStream << clparser::ShortNamePrefix << shortName;
+    if (helpArgument != nullptr)
+    {
+        helpArgument->match(arguments);
+        helpOrVersionFlagIsSet |= (*helpArgument)();
+    }
 
-	if (!isFlag)
-	{
-		argumentStream << " value";
-	}
+    if (versionArgument != nullptr)
+    {
+        versionArgument->match(arguments);
+        helpOrVersionFlagIsSet |= (*versionArgument)();
+    }
 
-	if (defaultValue.has_value())
-	{
-		argumentStream << "]";
-	}
-
-	argumentStream << " ";
-
-	guideStream << "\t" << clparser::LongNamePrefix << longName << ", " << clparser::ShortNamePrefix << shortName << "\t" << description;
-
-	if (defaultValue.has_value())
-	{
-		guideStream << " (Default value: " << *defaultValue << ")";
-	}
-
-	guideStream << std::endl;
+    return helpOrVersionFlagIsSet;
 }
 
-void clparser::CommandLineOptions::HelpMessageBuilder::visitPositionalArgument(const std::string& name, const size_t position, const std::optional<std::string> defaultValue)
+void clparser::CommandLineOptions::HelpMessageBuilder::visitNamedArgument(const std::string& shortName,
+                                                                          const std::string& longName,
+                                                                          const std::string& description,
+                                                                          const bool isFlag,
+                                                                          const std::optional<std::string> defaultValue)
 {
-	if (defaultValue.has_value())
-	{
-		argumentStream << "[";
-	}
+    if (defaultValue.has_value())
+    {
+        argumentStream << "[";
+    }
 
-	argumentStream << name;
+    argumentStream << clparser::ShortNamePrefix << shortName;
 
-	if (defaultValue.has_value())
-	{
-		argumentStream << "]";
-	}
+    if (!isFlag)
+    {
+        argumentStream << " value";
+    }
 
-	argumentStream << " ";
+    if (defaultValue.has_value())
+    {
+        argumentStream << "]";
+    }
+
+    argumentStream << " ";
+
+    guideStream << "\t" << clparser::LongNamePrefix << longName << ", " << clparser::ShortNamePrefix << shortName << "\t"
+                << description;
+
+    if (defaultValue.has_value())
+    {
+        guideStream << " (Default value: " << *defaultValue << ")";
+    }
+
+    guideStream << std::endl;
+}
+
+void clparser::CommandLineOptions::HelpMessageBuilder::visitPositionalArgument(const std::string& name,
+                                                                               const size_t position,
+                                                                               const std::optional<std::string> defaultValue)
+{
+    if (defaultValue.has_value())
+    {
+        argumentStream << "[";
+    }
+
+    argumentStream << name;
+
+    if (defaultValue.has_value())
+    {
+        argumentStream << "]";
+    }
+
+    argumentStream << " ";
 }
 
 std::string clparser::CommandLineOptions::HelpMessageBuilder::getArguments() const
 {
-	return argumentStream.str();
+    return argumentStream.str();
 }
 
 std::string clparser::CommandLineOptions::HelpMessageBuilder::getOptionGuides() const
 {
-	return guideStream.str();
+    return guideStream.str();
 }
 
-void clparser::CommandLineOptions::Validator::visitNamedArgument(
-	const std::string& shortName,
-	const std::string& longName,
-	const std::string& description,
-	const bool isFlag,
-	const std::optional<std::string> defaultValue)
+void clparser::CommandLineOptions::Validator::visitNamedArgument(const std::string& shortName,
+                                                                 const std::string& longName,
+                                                                 const std::string& description,
+                                                                 const bool isFlag,
+                                                                 const std::optional<std::string> defaultValue)
 {
-	hasAddedNamedArgument = true;
+    hasAddedNamedArgument = true;
 }
 
-void clparser::CommandLineOptions::Validator::visitPositionalArgument(const std::string& name, const size_t position, const std::optional<std::string> defaultValue)
+void clparser::CommandLineOptions::Validator::visitPositionalArgument(const std::string& name,
+                                                                      const size_t position,
+                                                                      const std::optional<std::string> defaultValue)
 {
-	if (hasAddedNamedArgument)
-	{
-		throw std::logic_error("Cannot add positional argument after named argument");
-	}
+    if (hasAddedNamedArgument)
+    {
+        throw std::logic_error("Cannot add positional argument after named argument");
+    }
 }

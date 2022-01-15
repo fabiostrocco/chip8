@@ -8,10 +8,32 @@
     <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp">
       <Filter>clparser</Filter>
     </ClCompile>
+    <ClCompile Include="$(EmulatorDir)Emulator.cpp">
+      <Filter>emulator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SrcDir)Logger.cpp" />
+    <ClCompile Include="$(EmulatorDir)Cpu.cpp">
+      <Filter>emulator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(EmulatorDir)EmulatorWindow.cpp">
+      <Filter>emulator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(EmulatorDir)Gpu.cpp">
+      <Filter>emulator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(EmulatorDir)Timer.cpp">
+      <Filter>emulator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="clparser">
       <UniqueIdentifier>{498b898e-7468-4e00-ac16-668fa2afd0cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logging">
+      <UniqueIdentifier>{f13a913e-51ba-470a-8955-d7405e3b217b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="emulator">
+      <UniqueIdentifier>{6ee6f479-c402-4780-96a2-e0f81672e496}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +66,50 @@
     </ClInclude>
     <ClInclude Include="$(CommandLineParserDir)IArgumentVisitor.hpp">
       <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)ArgumentConcept.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(LoggingDir)LoggerConcept.hpp">
+      <Filter>logging</Filter>
+    </ClInclude>
+    <ClInclude Include="$(LoggingDir)Logger.hpp">
+      <Filter>logging</Filter>
+    </ClInclude>
+    <ClInclude Include="$(LoggingDir)Severity.hpp">
+      <Filter>logging</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)Emulator.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SrcDir)Logger.hpp" />
+    <ClInclude Include="$(SrcDir)CommandLineOptions.hpp" />
+    <ClInclude Include="$(SrcDir)ExitCode.hpp" />
+    <ClInclude Include="$(SrcDir)metadata.hpp" />
+    <ClInclude Include="$(EmulatorDir)Cpu.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)EmulatorWindow.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)Gpu.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)ICpu.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)IGpu.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)Registers.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)Timer.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)IFrameBuffer.hpp" />
+    <ClInclude Include="$(EmulatorDir)ITimer.hpp">
+      <Filter>emulator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

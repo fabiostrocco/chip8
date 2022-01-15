@@ -1,96 +1,114 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <type_traits>
-#include <sstream>
 #include <optional>
+#include <sstream>
+#include <string>
+#include <type_traits>
+#include <vector>
 
-#include "ICommandLineOptions.hpp"
 #include "Argument.hpp"
+#include "ArgumentConcept.hpp"
 #include "ArgumentFormatException.hpp"
 #include "ArgumentNotFoundException.hpp"
 #include "IArgumentVisitor.hpp"
+#include "ICommandLineOptions.hpp"
 
 namespace clparser
 {
-	template <typename ArgumentType>
-		requires IsStreammable<ArgumentType>
-	class NamedArgument : public clparser::Argument<ArgumentType>
-	{
-	public:
-		NamedArgument(
-			clparser::ICommandLineOptions& options,
-			const std::string& shortName,
-			const std::string& longName,
-			const std::string& description,
-			const std::optional<ArgumentType> defaultValue) :
+    template <clparser::ArgumentConcept ArgumentType>
+    class NamedArgument : public clparser::Argument<ArgumentType>
+    {
+      public:
+        NamedArgument(clparser::ICommandLineOptions& options,
+                      const std::string& shortName,
+                      const std::string& longName,
+                      const std::string& description,
+                      const std::optional<ArgumentType> defaultValue) requires(!std::is_same<ArgumentType, bool>::value)
+            :
 
-			Argument<ArgumentType>(options, defaultValue),
-			shortName(shortName),
-			longName(longName),
-			description(description)
-		{
-			options.addArgument(*this);
-		}
+            Argument<ArgumentType>(options, defaultValue)
+            , shortName(shortName)
+            , longName(longName)
+            , description(description)
+        {
+            options.addArgument(*this);
+        }
 
-		void accept(clparser::IArgumentVisitor& visitor) override
-		{
-			auto defaultValueString = clparser::Argument<ArgumentType>::getDefaultValueString();
-			visitor.visitNamedArgument(shortName, longName, description, std::is_same<ArgumentType, bool>::value, defaultValueString);
-		}
+        NamedArgument(clparser::ICommandLineOptions& options,
+                      const std::string& shortName,
+                      const std::string& longName,
+                      const std::string& description) requires(std::is_same<ArgumentType, bool>::value)
+            :
 
-	protected:
-		void internalMatch(const std::vector<std::string>& arguments) override
-		{
-			ArgumentType storage;
+            Argument<ArgumentType>(options)
+            , shortName(shortName)
+            , longName(longName)
+            , description(description)
+        {
+            options.addArgument(*this);
+        }
 
-			auto it = std::find_if(
-				arguments.begin(),
-				arguments.end(),
-				[&](const std::string& arg) { return arg == ShortNamePrefix + shortName || arg == LongNamePrefix + longName; });
+        void accept(clparser::IArgumentVisitor& visitor) override
+        {
+            auto defaultValueString = clparser::Argument<ArgumentType>::getDefaultValueString();
+            visitor.visitNamedArgument(shortName,
+                                       longName,
+                                       description,
+                                       std::is_same<ArgumentType, bool>::value,
+                                       defaultValueString);
+        }
 
-			const std::string longNameComplete = LongNamePrefix + longName;
+      protected:
+        void internalMatch(const std::vector<std::string>& arguments) override
+        {
+            ArgumentType storage;
 
-			// For boolean flags: if argument has been found, set storage to true, otherwise false
-			if constexpr (std::is_same<ArgumentType, bool>::value)
-			{
-				storage = (it != arguments.end());
-				clparser::Argument<ArgumentType>::setStorage(storage);
-				return;
-			}
+            auto it = std::find_if(arguments.begin(),
+                                   arguments.end(),
+                                   [&](const std::string& arg)
+                                   { return arg == ShortNamePrefix + shortName || arg == LongNamePrefix + longName; });
 
-			if (it == arguments.end())
-			{
-				throw clparser::ArgumentNotFoundException(longNameComplete);
-			}
+            const std::string longNameComplete = LongNamePrefix + longName;
 
-			const size_t indexOfParameter = it - arguments.begin();
+            // For boolean flags: if argument has been found, set storage to true, otherwise false
+            if constexpr (std::is_same<ArgumentType, bool>::value)
+            {
+                storage = (it != arguments.end());
+                clparser::Argument<ArgumentType>::setStorage(storage);
+                return;
+            }
 
-			if (indexOfParameter + 1 >= arguments.size())
-			{
-				throw clparser::ArgumentFormatException(longNameComplete, "<empty>");
-			}
+            if (it == arguments.end())
+            {
+                throw clparser::ArgumentNotFoundException(longNameComplete);
+            }
 
-			const std::string value = arguments[indexOfParameter + 1];
+            const size_t indexOfParameter = it - arguments.begin();
 
-			if (clparser::isArgumentName(value))
-			{
-				throw clparser::ArgumentFormatException(longNameComplete, value);
-			}
+            if (indexOfParameter + 1 >= arguments.size())
+            {
+                throw clparser::ArgumentFormatException(longNameComplete, "<empty>");
+            }
 
-			std::stringstream ss(value);
-			if (!(ss >> storage))
-			{
-				throw clparser::ArgumentFormatException(longNameComplete, value);
-			}
+            const std::string value = arguments[indexOfParameter + 1];
 
-			clparser::Argument<ArgumentType>::setStorage(storage);
-		}
+            if (clparser::isArgumentName(value))
+            {
+                throw clparser::ArgumentFormatException(longNameComplete, value);
+            }
 
-	private:
-		const std::string shortName;
-		const std::string longName;
-		const std::string description;
-	};
+            std::stringstream ss(value);
+            if (!(ss >> storage))
+            {
+                throw clparser::ArgumentFormatException(longNameComplete, value);
+            }
+
+            clparser::Argument<ArgumentType>::setStorage(storage);
+        }
+
+      private:
+        const std::string shortName;
+        const std::string longName;
+        const std::string description;
+    };
 }

@@ -1,0 +1,557 @@
+[ 10%] Built target gtest
+[ 20%] Built target gmock
+[ 25%] Building CXX object CMakeFiles/chip8-test.dir/home/fabio/chip8/test/CommandLineParserUnitTests.cpp.o
+In file included from /home/fabio/chip8/builds/cmake/../../src/clparser/Argument.hpp:9,
+                 from /home/fabio/chip8/builds/cmake/../../src/clparser/NamedArgument.hpp:9,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:6:
+/home/fabio/chip8/builds/cmake/../../src/clparser/ArgumentConcept.hpp:9:31: error: ‘is_streamable’ was not declared in this scope
+    9 |     concept ArgumentConcept = is_streamable<std::stringstream, ValueType>::value && !std::is_reference<ValueType>::value &&
+      |                               ^~~~~~~~~~~~~
+/home/fabio/chip8/builds/cmake/../../src/clparser/ArgumentConcept.hpp:9:62: error: expected primary-expression before ‘,’ token
+    9 |     concept ArgumentConcept = is_streamable<std::stringstream, ValueType>::value && !std::is_reference<ValueType>::value &&
+      |                                                              ^
+/home/fabio/chip8/builds/cmake/../../src/clparser/ArgumentConcept.hpp:18:19: error: declaration of template parameter ‘StreamType’ shadows template parameter
+   18 |         template <typename StreamType, typename ArgumentType>
+      |                   ^~~~~~~~
+/home/fabio/chip8/builds/cmake/../../src/clparser/ArgumentConcept.hpp:15:15: note: template parameter ‘StreamType’ declared here
+   15 |     template <typename StreamType, typename ArgumentType>
+      |               ^~~~~~~~
+/home/fabio/chip8/builds/cmake/../../src/clparser/ArgumentConcept.hpp:18:40: error: declaration of template parameter ‘ArgumentType’ shadows template parameter
+   18 |         template <typename StreamType, typename ArgumentType>
+      |                                        ^~~~~~~~
+/home/fabio/chip8/builds/cmake/../../src/clparser/ArgumentConcept.hpp:15:36: note: template parameter ‘ArgumentType’ declared here
+   15 |     template <typename StreamType, typename ArgumentType>
+      |                                    ^~~~~~~~
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_MatchedRequiredStringArgument_Succeeds_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:25:34: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+   25 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:25:34: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:25:125: error: expression list treated as compound expression in initializer [-fpermissive]
+   25 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                                                                                                             ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:25:123: error: invalid user-defined conversion from ‘std::optional<std::__cxx11::basic_string<char> >’ to ‘int’ [-fpermissive]
+   25 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = std::__cxx11::basic_string<char>]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:26:24: error: request for member ‘match’ in ‘requiredString’, which is of non-class type ‘int’
+   26 |         requiredString.match({"-short", "value"});
+      |                        ^~~~~
+In file included from /home/fabio/chip8/builds/cmake/gtest/googletest/include/gtest/gtest.h:390,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/internal/gmock-internal-utils.h:48,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:143,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:27:34: error: ‘requiredString’ cannot be used as a function
+   27 |         EXPECT_EQ(requiredString(), "value");
+      |                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_MatchedRequiredUnsignedNumericArgument_Succeeds_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:35:31: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+   35 |         NamedArgument<uint32_t> requiredUint(options, "short", "long", std::string(), clparser::required<uint32_t>());
+      |                               ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:35:31: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:35:117: error: expression list treated as compound expression in initializer [-fpermissive]
+   35 |         NamedArgument<uint32_t> requiredUint(options, "short", "long", std::string(), clparser::required<uint32_t>());
+      |                                                                                                                     ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:35:115: error: invalid user-defined conversion from ‘std::optional<unsigned int>’ to ‘int’ [-fpermissive]
+   35 |         NamedArgument<uint32_t> requiredUint(options, "short", "long", std::string(), clparser::required<uint32_t>());
+      |                                                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = unsigned int]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:36:22: error: request for member ‘match’ in ‘requiredUint’, which is of non-class type ‘int’
+   36 |         requiredUint.match({"-short", "100"});
+      |                      ^~~~~
+In file included from /home/fabio/chip8/builds/cmake/gtest/googletest/include/gtest/gtest.h:390,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/internal/gmock-internal-utils.h:48,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:143,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:37:32: error: ‘requiredUint’ cannot be used as a function
+   37 |         EXPECT_EQ(requiredUint(), 100);
+      |                                ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_MatchedRequiredSignedNumericArgument_Succeeds_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:45:30: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+   45 |         NamedArgument<int32_t> requiredInt(options, "short", "long", std::string(), clparser::required<int32_t>());
+      |                              ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:45:30: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:45:114: error: expression list treated as compound expression in initializer [-fpermissive]
+   45 |         NamedArgument<int32_t> requiredInt(options, "short", "long", std::string(), clparser::required<int32_t>());
+      |                                                                                                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:45:112: error: invalid user-defined conversion from ‘std::optional<int>’ to ‘int’ [-fpermissive]
+   45 |         NamedArgument<int32_t> requiredInt(options, "short", "long", std::string(), clparser::required<int32_t>());
+      |                                                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = int]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:46:21: error: request for member ‘match’ in ‘requiredInt’, which is of non-class type ‘int’
+   46 |         requiredInt.match({"-short", "-100"});
+      |                     ^~~~~
+In file included from /home/fabio/chip8/builds/cmake/gtest/googletest/include/gtest/gtest.h:390,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/internal/gmock-internal-utils.h:48,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:143,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:47:31: error: ‘requiredInt’ cannot be used as a function
+   47 |         EXPECT_EQ(requiredInt(), -100);
+      |                               ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_MatchedRequiredFloatNumericArgument_Succeeds_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:55:28: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+   55 |         NamedArgument<float> requiredFloat(options, "short", "long", std::string(), clparser::required<float>());
+      |                            ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:55:28: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:55:112: error: expression list treated as compound expression in initializer [-fpermissive]
+   55 |         NamedArgument<float> requiredFloat(options, "short", "long", std::string(), clparser::required<float>());
+      |                                                                                                                ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:55:110: error: invalid user-defined conversion from ‘std::optional<float>’ to ‘int’ [-fpermissive]
+   55 |         NamedArgument<float> requiredFloat(options, "short", "long", std::string(), clparser::required<float>());
+      |                                                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = float]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:56:23: error: request for member ‘match’ in ‘requiredFloat’, which is of non-class type ‘int’
+   56 |         requiredFloat.match({"-short", "0.0"});
+      |                       ^~~~~
+In file included from /home/fabio/chip8/builds/cmake/gtest/googletest/include/gtest/gtest.h:390,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/internal/gmock-internal-utils.h:48,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:143,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:57:33: error: ‘requiredFloat’ cannot be used as a function
+   57 |         EXPECT_EQ(requiredFloat(), 0.0f);
+      |                                 ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_MatchedRequiredBoolArgument_ReturnsTrue_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:65:27: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+   65 |         NamedArgument<bool> requiredFlag(options, "short", "long", std::string(), clparser::required<bool>());
+      |                           ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:65:27: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:65:109: error: expression list treated as compound expression in initializer [-fpermissive]
+   65 |         NamedArgument<bool> requiredFlag(options, "short", "long", std::string(), clparser::required<bool>());
+      |                                                                                                             ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:65:107: error: invalid user-defined conversion from ‘std::optional<bool>’ to ‘int’ [-fpermissive]
+   65 |         NamedArgument<bool> requiredFlag(options, "short", "long", std::string(), clparser::required<bool>());
+      |                                                                                   ~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = bool]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:66:22: error: request for member ‘match’ in ‘requiredFlag’, which is of non-class type ‘int’
+   66 |         requiredFlag.match({"-short"});
+      |                      ^~~~~
+In file included from /home/fabio/chip8/builds/cmake/gtest/googletest/include/gtest/gtest.h:390,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/internal/gmock-internal-utils.h:48,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:143,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:67:32: error: ‘requiredFlag’ cannot be used as a function
+   67 |         EXPECT_EQ(requiredFlag(), true);
+      |                                ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_UnmatchedRequiredBoolArgument_ReturnsFalse_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:75:27: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+   75 |         NamedArgument<bool> requiredFlag(options, "short", "long", std::string(), clparser::required<bool>());
+      |                           ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:75:27: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:75:109: error: expression list treated as compound expression in initializer [-fpermissive]
+   75 |         NamedArgument<bool> requiredFlag(options, "short", "long", std::string(), clparser::required<bool>());
+      |                                                                                                             ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:75:107: error: invalid user-defined conversion from ‘std::optional<bool>’ to ‘int’ [-fpermissive]
+   75 |         NamedArgument<bool> requiredFlag(options, "short", "long", std::string(), clparser::required<bool>());
+      |                                                                                   ~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = bool]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:76:22: error: request for member ‘match’ in ‘requiredFlag’, which is of non-class type ‘int’
+   76 |         requiredFlag.match({});
+      |                      ^~~~~
+In file included from /home/fabio/chip8/builds/cmake/gtest/googletest/include/gtest/gtest.h:390,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/internal/gmock-internal-utils.h:48,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:143,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:77:32: error: ‘requiredFlag’ cannot be used as a function
+   77 |         EXPECT_EQ(requiredFlag(), false);
+      |                                ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_UnmatchedRequiredArgument_Fails_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:85:34: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+   85 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:85:34: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:85:125: error: expression list treated as compound expression in initializer [-fpermissive]
+   85 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                                                                                                             ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:85:123: error: invalid user-defined conversion from ‘std::optional<std::__cxx11::basic_string<char> >’ to ‘int’ [-fpermissive]
+   85 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = std::__cxx11::basic_string<char>]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:89:28: error: request for member ‘match’ in ‘requiredString’, which is of non-class type ‘int’
+   89 |             requiredString.match({"-foo", "value"});
+      |                            ^~~~~
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_IllFormedRequiredNumbricArgument_Fails_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:103:31: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+  103 |         NamedArgument<uint32_t> requiredString(options, "short", "long", std::string(), clparser::required<uint32_t>());
+      |                               ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:103:31: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:103:119: error: expression list treated as compound expression in initializer [-fpermissive]
+  103 |         NamedArgument<uint32_t> requiredString(options, "short", "long", std::string(), clparser::required<uint32_t>());
+      |                                                                                                                       ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:103:117: error: invalid user-defined conversion from ‘std::optional<unsigned int>’ to ‘int’ [-fpermissive]
+  103 |         NamedArgument<uint32_t> requiredString(options, "short", "long", std::string(), clparser::required<uint32_t>());
+      |                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = unsigned int]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:107:28: error: request for member ‘match’ in ‘requiredString’, which is of non-class type ‘int’
+  107 |             requiredString.match({"--long", "AR"});
+      |                            ^~~~~
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_MatchedLongName_Succeeds_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:123:34: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+  123 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:123:34: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:123:125: error: expression list treated as compound expression in initializer [-fpermissive]
+  123 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                                                                                                             ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:123:123: error: invalid user-defined conversion from ‘std::optional<std::__cxx11::basic_string<char> >’ to ‘int’ [-fpermissive]
+  123 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = std::__cxx11::basic_string<char>]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:124:24: error: request for member ‘match’ in ‘requiredString’, which is of non-class type ‘int’
+  124 |         requiredString.match({"--long", Value});
+      |                        ^~~~~
+In file included from /home/fabio/chip8/builds/cmake/gtest/googletest/include/gtest/gtest.h:390,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/internal/gmock-internal-utils.h:48,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:143,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:125:34: error: ‘requiredString’ cannot be used as a function
+  125 |         EXPECT_EQ(requiredString(), Value);
+      |                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_UnmatchedShortForLong_Fails_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:133:34: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+  133 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:133:34: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:133:125: error: expression list treated as compound expression in initializer [-fpermissive]
+  133 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                                                                                                             ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:133:123: error: invalid user-defined conversion from ‘std::optional<std::__cxx11::basic_string<char> >’ to ‘int’ [-fpermissive]
+  133 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = std::__cxx11::basic_string<char>]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:137:28: error: request for member ‘match’ in ‘requiredString’, which is of non-class type ‘int’
+  137 |             requiredString.match({"--short", "0"});
+      |                            ^~~~~
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_UnmatchedLongForShort_Fails_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:151:34: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+  151 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:151:34: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:151:125: error: expression list treated as compound expression in initializer [-fpermissive]
+  151 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                                                                                                             ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:151:123: error: invalid user-defined conversion from ‘std::optional<std::__cxx11::basic_string<char> >’ to ‘int’ [-fpermissive]
+  151 |         NamedArgument<std::string> requiredString(options, "short", "long", std::string(), clparser::required<std::string>());
+      |                                                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = std::__cxx11::basic_string<char>]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:155:28: error: request for member ‘match’ in ‘requiredString’, which is of non-class type ‘int’
+  155 |             requiredString.match({"-long", "0"});
+      |                            ^~~~~
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_UnmatchedOptionalArgument_Succeeds_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:171:31: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+  171 |         NamedArgument<uint32_t> optionalString(options,
+      |                               ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:171:31: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:175:90: error: expression list treated as compound expression in initializer [-fpermissive]
+  175 |                                                clparser::optional<uint32_t>(DefaultValue));
+      |                                                                                          ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:175:76: error: invalid user-defined conversion from ‘std::optional<unsigned int>’ to ‘int’ [-fpermissive]
+  175 |                                                clparser::optional<uint32_t>(DefaultValue));
+      |                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = unsigned int]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:176:24: error: request for member ‘match’ in ‘optionalString’, which is of non-class type ‘int’
+  176 |         optionalString.match({"--foo", "value"});
+      |                        ^~~~~
+In file included from /home/fabio/chip8/builds/cmake/gtest/googletest/include/gtest/gtest.h:390,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/internal/gmock-internal-utils.h:48,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:143,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:177:34: error: ‘optionalString’ cannot be used as a function
+  177 |         EXPECT_EQ(optionalString(), DefaultValue);
+      |                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_NamedArgument_IllFormedOptionalNumericArgument_Fails_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:186:31: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::NamedArgument’
+  186 |         NamedArgument<uint32_t> optionalString(options, "short", "long", std::string(), clparser::optional<uint32_t>(0));
+      |                               ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:186:31: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:186:120: error: expression list treated as compound expression in initializer [-fpermissive]
+  186 |         NamedArgument<uint32_t> optionalString(options, "short", "long", std::string(), clparser::optional<uint32_t>(0));
+      |                                                                                                                        ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:186:117: error: invalid user-defined conversion from ‘std::optional<unsigned int>’ to ‘int’ [-fpermissive]
+  186 |         NamedArgument<uint32_t> optionalString(options, "short", "long", std::string(), clparser::optional<uint32_t>(0));
+      |                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = unsigned int]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:190:28: error: request for member ‘match’ in ‘optionalString’, which is of non-class type ‘int’
+  190 |             optionalString.match({"-short", "AR"});
+      |                            ^~~~~
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_PositionalArgument_MatchedRequiredArgumentAtStart_Succeeds_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:204:39: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::PositionalArgument’
+  204 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::required<std::string>());
+      |                                       ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:204:39: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:204:114: error: expression list treated as compound expression in initializer [-fpermissive]
+  204 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::required<std::string>());
+      |                                                                                                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:204:112: error: invalid user-defined conversion from ‘std::optional<std::__cxx11::basic_string<char> >’ to ‘int’ [-fpermissive]
+  204 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::required<std::string>());
+      |                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = std::__cxx11::basic_string<char>]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:205:26: error: request for member ‘match’ in ‘positionalString’, which is of non-class type ‘int’
+  205 |         positionalString.match({"<dummy>", "name", "--foo", "--bar"});
+      |                          ^~~~~
+In file included from /home/fabio/chip8/builds/cmake/gtest/googletest/include/gtest/gtest.h:390,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/internal/gmock-internal-utils.h:48,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:143,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:206:36: error: ‘positionalString’ cannot be used as a function
+  206 |         EXPECT_EQ(positionalString(), "name");
+      |                                    ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_PositionalArgument_UnmatchedRequiredArgumentAtStart_Fails_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:214:39: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::PositionalArgument’
+  214 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::required<std::string>());
+      |                                       ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:214:39: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:214:114: error: expression list treated as compound expression in initializer [-fpermissive]
+  214 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::required<std::string>());
+      |                                                                                                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:214:112: error: invalid user-defined conversion from ‘std::optional<std::__cxx11::basic_string<char> >’ to ‘int’ [-fpermissive]
+  214 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::required<std::string>());
+      |                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = std::__cxx11::basic_string<char>]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:218:30: error: request for member ‘match’ in ‘positionalString’, which is of non-class type ‘int’
+  218 |             positionalString.match({"<dummy>"});
+      |                              ^~~~~
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_PositionalArgument_UnmatchedRequiredArgumentAtEnd_Fails_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:231:39: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::PositionalArgument’
+  231 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::required<std::string>());
+      |                                       ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:231:39: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:231:114: error: expression list treated as compound expression in initializer [-fpermissive]
+  231 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::required<std::string>());
+      |                                                                                                                  ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:231:112: error: invalid user-defined conversion from ‘std::optional<std::__cxx11::basic_string<char> >’ to ‘int’ [-fpermissive]
+  231 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::required<std::string>());
+      |                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = std::__cxx11::basic_string<char>]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:235:30: error: request for member ‘match’ in ‘positionalString’, which is of non-class type ‘int’
+  235 |             positionalString.match({"<dummy>", "--field", "name"});
+      |                              ^~~~~
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_PositionalArgument_IllFormedRequiredArgumentAtStart_Fails_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:248:36: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::PositionalArgument’
+  248 |         PositionalArgument<uint32_t> positionalString(options, "positional", clparser::required<uint32_t>());
+      |                                    ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:248:36: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:248:108: error: expression list treated as compound expression in initializer [-fpermissive]
+  248 |         PositionalArgument<uint32_t> positionalString(options, "positional", clparser::required<uint32_t>());
+      |                                                                                                            ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:248:106: error: invalid user-defined conversion from ‘std::optional<unsigned int>’ to ‘int’ [-fpermissive]
+  248 |         PositionalArgument<uint32_t> positionalString(options, "positional", clparser::required<uint32_t>());
+      |                                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = unsigned int]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:252:30: error: request for member ‘match’ in ‘positionalString’, which is of non-class type ‘int’
+  252 |             positionalString.match({"<dummy>", "X", "--name"});
+      |                              ^~~~~
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp: In member function ‘virtual void clparser::unit_tests::CommandLineParserUnitTests_PositionalArgument_UnmatchedOptionalArgument_Succeeds_Test::TestBody()’:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:267:39: error: template constraint failure for ‘template<class ArgumentType>  requires  ArgumentConcept<ArgumentType> class clparser::PositionalArgument’
+  267 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::optional<std::string>(DefaultValue));
+      |                                       ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:267:39: note: constraints not satisfied
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:267:126: error: expression list treated as compound expression in initializer [-fpermissive]
+  267 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::optional<std::string>(DefaultValue));
+      |                                                                                                                              ^
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:267:112: error: invalid user-defined conversion from ‘std::optional<std::__cxx11::basic_string<char> >’ to ‘int’ [-fpermissive]
+  267 |         PositionalArgument<std::string> positionalString(options, "positional", clparser::optional<std::string>(DefaultValue));
+      |                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+In file included from /usr/include/c++/10/ranges:45,
+                 from /usr/include/c++/10/bits/ranges_algobase.h:38,
+                 from /usr/include/c++/10/bits/ranges_algo.h:35,
+                 from /usr/include/c++/10/algorithm:64,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:135,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/usr/include/c++/10/optional:913:26: note: candidate is: ‘constexpr std::optional<_Tp>::operator bool() const [with _Tp = std::__cxx11::basic_string<char>]’ (near match)
+  913 |       constexpr explicit operator bool() const noexcept
+      |                          ^~~~~~~~
+/usr/include/c++/10/optional:913:26: note:   return type ‘bool’ of explicit conversion function cannot be converted to ‘int’ with a qualification conversion
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:268:26: error: request for member ‘match’ in ‘positionalString’, which is of non-class type ‘int’
+  268 |         positionalString.match({"<dummy>", "--flag"});
+      |                          ^~~~~
+In file included from /home/fabio/chip8/builds/cmake/gtest/googletest/include/gtest/gtest.h:390,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/internal/gmock-internal-utils.h:48,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock-actions.h:143,
+                 from /home/fabio/chip8/builds/cmake/gtest/googlemock/include/gmock/gmock.h:57,
+                 from /home/fabio/chip8/test/CommandLineParserUnitTests.cpp:1:
+/home/fabio/chip8/test/CommandLineParserUnitTests.cpp:269:36: error: ‘positionalString’ cannot be used as a function
+  269 |         EXPECT_EQ(positionalString(), std::string(DefaultValue));
+      |                                    ^
+make[2]: *** [CMakeFiles/chip8-test.dir/build.make:76: CMakeFiles/chip8-test.dir/home/fabio/chip8/test/CommandLineParserUnitTests.cpp.o] Errore 1
+make[1]: *** [CMakeFiles/Makefile2:141: CMakeFiles/chip8-test.dir/all] Errore 2
+make: *** [Makefile:130: all] Errore 2
