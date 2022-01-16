@@ -29,11 +29,11 @@
     <Filter Include="clparser">
       <UniqueIdentifier>{498b898e-7468-4e00-ac16-668fa2afd0cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="logging">
-      <UniqueIdentifier>{f13a913e-51ba-470a-8955-d7405e3b217b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="emulator">
       <UniqueIdentifier>{6ee6f479-c402-4780-96a2-e0f81672e496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logging">
+      <UniqueIdentifier>{f13a913e-51ba-470a-8955-d7405e3b217b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,9 +41,6 @@
       <Filter>clparser</Filter>
     </ClInclude>
     <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp">
-      <Filter>clparser</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp">
       <Filter>clparser</Filter>
     </ClInclude>
     <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp">
@@ -84,7 +81,6 @@
     </ClInclude>
     <ClInclude Include="$(SrcDir)Logger.hpp" />
     <ClInclude Include="$(SrcDir)CommandLineOptions.hpp" />
-    <ClInclude Include="$(SrcDir)ExitCode.hpp" />
     <ClInclude Include="$(SrcDir)metadata.hpp" />
     <ClInclude Include="$(EmulatorDir)Cpu.hpp">
       <Filter>emulator</Filter>
@@ -107,8 +103,25 @@
     <ClInclude Include="$(EmulatorDir)Timer.hpp">
       <Filter>emulator</Filter>
     </ClInclude>
-    <ClInclude Include="$(EmulatorDir)IFrameBuffer.hpp" />
     <ClInclude Include="$(EmulatorDir)ITimer.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)WindowInitializationException.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)IFrameBuffer.hpp">
+      <Filter>logging</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)InstructionBinder.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SrcDir)ExitCode.hpp">
+      <Filter>clparser</Filter>
+    </ClInclude>
+    <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp">
+      <Filter>emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(EmulatorDir)InstructionSet.hpp">
       <Filter>emulator</Filter>
     </ClInclude>
   </ItemGroup>

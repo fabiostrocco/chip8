@@ -211,9 +211,12 @@
     <ClInclude Include="$(EmulatorDir)ICpu.hpp" />
     <ClInclude Include="$(EmulatorDir)IFrameBuffer.hpp" />
     <ClInclude Include="$(EmulatorDir)IGpu.hpp" />
+    <ClInclude Include="$(EmulatorDir)InstructionBinder.hpp" />
+    <ClInclude Include="$(EmulatorDir)InstructionSet.hpp" />
 	<ClInclude Include="$(EmulatorDir)ITimer.hpp" />
     <ClInclude Include="$(EmulatorDir)Registers.hpp" />
     <ClInclude Include="$(EmulatorDir)Timer.hpp" />
+    <ClInclude Include="$(EmulatorDir)WindowInitializationException.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

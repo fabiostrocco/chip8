@@ -7,6 +7,7 @@
 #include "clparser/ArgumentNotFoundException.hpp"
 #include "clparser/CommandLineParser.hpp"
 #include "emulator/Emulator.hpp"
+#include "emulator/WindowInitializationException.hpp"
 #include "logging/Severity.hpp"
 #include "metadata.hpp"
 
@@ -48,6 +49,11 @@ int main(int argc, char* argv[])
         std::cout << options.getHelpMessage(chip8::metadata::ProgramName) << std::endl;
         return chip8::ExitCode::CommandLineArgsParseError;
     }
+    catch (chip8::WindowInitializationException& windowFailure)
+    {
+        logger.logError(windowFailure.what());
+        return chip8::ExitCode::WindowInitializationFailure;
+    }
 
-    return 0;
+    return chip8::ExitCode::Success;
 }

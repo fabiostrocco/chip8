@@ -36,6 +36,7 @@
     <TestDir>..\..\test\</TestDir>
     <SrcDir>..\..\src\</SrcDir>
     <CommandLineParserDir>$(SrcDir)\clparser\</CommandLineParserDir>
+	<EmulatorDir>$(SrcDir)\emulator\</EmulatorDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PublicIncludeDirectories>
@@ -60,6 +61,7 @@
   <ItemGroup>
     <ClCompile Include="$(TestDir)CommandLineParserUnitTests.cpp" />
     <ClCompile Include="$(TestDir)CommandLineParserIntegrationTests.cpp" />
+    <ClCompile Include="$(TestDir)InstructionBinderUnitTests.cpp" />
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\gtest-all.cc" />
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc" />
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gmock\gmock-all.cc" />
@@ -79,6 +81,9 @@
     <ClInclude Include="$(CommandLineParserDir)ICommandLineOptions.hpp" />
     <ClInclude Include="$(CommandLineParserDir)NamedArgument.hpp" />
     <ClInclude Include="$(CommandLineParserDir)PositionalArgument.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(EmulatorDir)InstructionBinder.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\vs\chip8.vcxproj">

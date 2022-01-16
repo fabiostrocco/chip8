@@ -41,7 +41,8 @@ set(CHIP8_TEST "../../test/")
 set(CHIP8_TEST_FILES
     "main.cpp"
     "${CHIP8_TEST}CommandLineParserUnitTests.cpp"
-    "${CHIP8_TEST}CommandLineParserIntegrationTests.cpp")
+    "${CHIP8_TEST}CommandLineParserIntegrationTests.cpp"
+    "${CHIP8_TEST}InstructionBinderUnitTests.cpp")
 
 set(CHIP8_TEST_SOURCE_FILES
     "${CHIP8_CLPARSER}CommandLineOptions.cpp"
