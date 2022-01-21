@@ -1,13 +1,19 @@
 #include "EmulatorWindow.hpp"
 
+#include <SDL_events.h>
+
+#include "InstructionBinder.hpp"
+#include "SDLChip8KeyMapping.hpp"
 #include "WindowInitializationException.hpp"
 #include "metadata.hpp"
-#include "InstructionBinder.hpp"
 
-chip8::EmulatorWindow::EmulatorWindow(const logging::Logger& logger)
+chip8::EmulatorWindow::EmulatorWindow(const logging::Logger& logger, chip8::Cpu& cpu)
     : logger(logger)
-    , diagonal(0)
+    , cpu(cpu)
 {
+    logger.logDebug("Initializing emulator window...");
+    init();
+    logger.logDebug("Emulator window initialized.");
 }
 
 chip8::EmulatorWindow::~EmulatorWindow()
@@ -20,10 +26,6 @@ chip8::EmulatorWindow::~EmulatorWindow()
 
 void chip8::EmulatorWindow::run()
 {
-    logger.logDebug("Initializing emulator window...");
-    init();
-    logger.logDebug("Emulator window initialized.");
-
     while (processEvents())
     {
         loop();
@@ -38,12 +40,11 @@ void chip8::EmulatorWindow::init()
     const std::string programName = chip8::metadata::ProgramName;
     const std::string windowTitle = programName + " emulator";
 
-    window = SDL_CreateWindow(windowTitle.c_str(),
-                              SDL_WINDOWPOS_CENTERED,
-                              SDL_WINDOWPOS_CENTERED,
-                              640,
-                              480,
-                              SDL_WindowFlags::SDL_WINDOW_SHOWN);
+    static constexpr size_t WindowWidth = 640;
+    static constexpr size_t WindowHeight = 320;
+
+    window =
+        SDL_CreateWindow(windowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WindowWidth, WindowHeight, SDL_WindowFlags::SDL_WINDOW_SHOWN);
 
     if (window == nullptr)
     {
@@ -66,6 +67,17 @@ void chip8::EmulatorWindow::init()
     {
         throw WindowInitializationException("Cannot create window renderer: " + std::string(SDL_GetError()));
     }
+
+    if (SDL_RenderSetLogicalSize(renderer, WindowWidth, WindowHeight) != 0)
+    {
+        throw WindowInitializationException("Rendering initialization failed: " + std::string(SDL_GetError()));
+    }
+
+    chip8ScreenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cpu.getWidth(), cpu.getHeight());
+    if (chip8ScreenTexture == nullptr)
+    {
+        throw WindowInitializationException("Cannot create emulator screen texture: " + std::string(SDL_GetError()));
+    }
 }
 
 bool chip8::EmulatorWindow::processEvents()
@@ -78,6 +90,22 @@ bool chip8::EmulatorWindow::processEvents()
         {
         case SDL_QUIT:
             return false;
+        case SDL_KEYDOWN:
+            if (chip8::SDLChip8KeyMapping.count(event.key.keysym.scancode) != 0)
+            {
+                const SDL_Scancode& scancode = event.key.keysym.scancode;
+                cpu.onKeyPressed(chip8::SDLChip8KeyMapping.find(scancode)->second);
+                logger.logDebug("Key %d pressed", chip8::SDLChip8KeyMapping.find(scancode)->second);
+            }
+            break;
+        case SDL_KEYUP:
+            const SDL_Scancode& scancode = event.key.keysym.scancode;
+            if (chip8::SDLChip8KeyMapping.count(scancode) != 0)
+            {
+                cpu.onKeyReleased(chip8::SDLChip8KeyMapping.find(scancode)->second);
+                logger.logDebug("Key %d released", chip8::SDLChip8KeyMapping.find(event.key.keysym.scancode)->second);
+            }
+            break;
         }
     }
 
@@ -86,24 +114,38 @@ bool chip8::EmulatorWindow::processEvents()
 
 void chip8::EmulatorWindow::loop()
 {
-    diagonal = (diagonal + 1) % 400;
+    cpu.runClockCycle();
+    
+    if (cpu.shouldPlayAudio())
+    {
+        audioController.play();
+    }
+    else
+    {
+        audioController.stop();
+    }
 }
 
 void chip8::EmulatorWindow::clearRenderer()
 {
-    SDL_SetRenderDrawColor(renderer, 200, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
 }
 
 void chip8::EmulatorWindow::drawFrame()
 {
-    SDL_Rect rect;
-    rect.x = diagonal;
-    rect.y = diagonal;
-    rect.w = 100;
-    rect.h = 100;
-    SDL_SetRenderDrawColor(renderer, 200, 200, 200, SDL_ALPHA_OPAQUE);
-    SDL_RenderFillRect(renderer, &rect);
+    std::vector<uint32_t> screenPixels;
+    const auto& frameBuffer = cpu.getFrameBuffer();
+
+    screenPixels.reserve(frameBuffer.size());
+
+    for (const bool& frameBufferPixel : frameBuffer)
+    {
+        screenPixels.emplace_back(frameBufferPixel ? 0xFFFFFFFF : 0xFF000000);
+    }
+
+    SDL_UpdateTexture(chip8ScreenTexture, nullptr, screenPixels.data(), cpu.getWidth() * sizeof(uint32_t));
+    SDL_RenderCopy(renderer, chip8ScreenTexture, nullptr, nullptr);
 }
 
 void chip8::EmulatorWindow::presentFrame()

@@ -20,6 +20,7 @@ set(CHIP8_SOURCE_FILES
     "${CHIP8_CLPARSER}CommandLineOptions.cpp"
     "${CHIP8_CLPARSER}CommandLineParser.cpp"
 	
+    "${CHIP8_EMULATOR}AudioController.cpp"
     "${CHIP8_EMULATOR}Cpu.cpp"
     "${CHIP8_EMULATOR}Emulator.cpp"
     "${CHIP8_EMULATOR}EmulatorWindow.cpp"
@@ -40,13 +41,18 @@ add_subdirectory(gtest)
 set(CHIP8_TEST "../../test/")
 set(CHIP8_TEST_FILES
     "main.cpp"
+    "${CHIP8_EMULATOR}Cpu.cpp"
+    "${CHIP8_EMULATOR}Gpu.cpp"
     "${CHIP8_TEST}CommandLineParserUnitTests.cpp"
     "${CHIP8_TEST}CommandLineParserIntegrationTests.cpp"
+    "${CHIP8_TEST}CpuUnitTests.cpp"
+    "${CHIP8_TEST}GpuUnitTests.cpp"
     "${CHIP8_TEST}InstructionBinderUnitTests.cpp")
 
 set(CHIP8_TEST_SOURCE_FILES
     "${CHIP8_CLPARSER}CommandLineOptions.cpp"
-    "${CHIP8_CLPARSER}CommandLineParser.cpp")
+    "${CHIP8_CLPARSER}CommandLineParser.cpp"
+    "${CHIP8_EMULATOR}Cpu.cpp")
 
 set(CHIP8_SRC "../../src/")
 

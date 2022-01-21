@@ -1,5 +1,7 @@
 #include "CommandLineParser.hpp"
 
+#include <filesystem>
+
 clparser::CommandLineParser::CommandLineParser(int argc, char** argv)
 {
     arguments.reserve(argc);

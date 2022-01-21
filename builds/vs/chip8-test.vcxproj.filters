@@ -7,13 +7,6 @@
     <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-filepath.cc" />
-    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-matchers.cc" />
-    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-port.cc" />
-    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-printers.cc" />
-    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-test-part.cc" />
-    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest-typed-test.cc" />
-    <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest.cc" />
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc" />
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gmock\gmock-all.cc">
       <Filter>gtest</Filter>
@@ -50,41 +43,15 @@
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc">
       <Filter>gtest</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp">
+    <ClCompile Include="$(TestDir)CpuUnitTests.cpp" />
+    <ClCompile Include="$(TestDir)InstructionBinderUnitTests.cpp" />
+    <ClCompile Include="$(EmulatorDir)Cpu.cpp">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)CommandLineOptions.hpp">
+    </ClCompile>
+    <ClCompile Include="$(TestDir)GpuUnitTests.cpp" />
+    <ClCompile Include="$(EmulatorDir)Gpu.cpp">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)NamedArgument.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)Argument.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)IArgument.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)IArgumentVisitor.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)ICommandLineOptions.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)PositionalArgument.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EmulatorDir)InstructionBinder.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

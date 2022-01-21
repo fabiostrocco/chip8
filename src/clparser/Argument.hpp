@@ -114,7 +114,7 @@ namespace clparser
         }
 
       private:
-        Argument<ArgumentType>(const Argument<ArgumentType>&) = delete;
+        Argument(const Argument<ArgumentType>&) = delete;
         Argument<ArgumentType>& operator=(const Argument<ArgumentType>&) = delete;
 
       private:

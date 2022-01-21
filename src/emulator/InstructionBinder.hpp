@@ -3,225 +3,95 @@
 #include <functional>
 #include <optional>
 #include <stdint.h>
+#include <tuple>
+#include <utility>
+#include <vector>
+
+#include "IBinder.hpp"
+#include "InstructionBinding.hpp"
 
 namespace chip8
 {
-    using BindingUnitType = uint8_t;
-    static constexpr uint8_t placeholder = 255;
-
-    static constexpr inline int isPlaceholder(const BindingUnitType& unit)
-    {
-        return unit == placeholder ? 1 : 0;
-    }
-
-    static constexpr inline int
-    numberOfPlaceHolders(BindingUnitType unit1, BindingUnitType unit2, BindingUnitType unit3, BindingUnitType unit4)
-    {
-        return isPlaceholder(unit1) + isPlaceholder(unit2) + isPlaceholder(unit3) + isPlaceholder(unit4);
-    }
-
-    class IBinder
+    template <binding::MatchingPatternType pattern1,
+              binding::MatchingPatternType pattern2,
+              binding::MatchingPatternType pattern3,
+              binding::MatchingPatternType pattern4,
+              typename... T>
+    requires(binding::BindingUnitTypeConcept<pattern1>&& binding::BindingUnitTypeConcept<pattern2>&& binding::BindingUnitTypeConcept<pattern3>&&
+                 binding::BindingUnitTypeConcept<pattern4>) class _InstructionBinder : public IBinder
     {
       public:
-        virtual void match(const uint8_t byte1, const uint8_t byte2) = 0;
-    };
-
-    template <BindingUnitType unit>
-    concept BindingUnitTypeConcept = unit <= 0xf || unit == placeholder;
-
-    template <BindingUnitType unit1, BindingUnitType unit2, BindingUnitType unit3, BindingUnitType unit4>
-    requires(BindingUnitTypeConcept<unit1>&& BindingUnitTypeConcept<unit2>&& BindingUnitTypeConcept<unit3>&&
-                 BindingUnitTypeConcept<unit4>) class InstructionBinderBase : public IBinder
-    {
-      public:
-        void match(const uint8_t byte1, const uint8_t byte2) override
+        _InstructionBinder(std::function<void(T...)> matchCallback)
+            : matchCallback(matchCallback)
         {
-            BindingUnitType value1 = (byte1 & 0xF0) >> 4;
-            BindingUnitType value2 = byte1 & 0x0F;
-            BindingUnitType value3 = (byte2 & 0xF0) >> 4;
-            BindingUnitType value4 = byte2 & 0x0F;
+        }
 
-            if (internalMatch(value1, value2, value3, value4))
+        bool match(const uint8_t byte1, const uint8_t byte2) override
+        {
+            return match(byte1, byte2, std::make_index_sequence<sizeof...(T)>());
+        }
+
+      private:
+        template <size_t... valueIndex>
+        bool match(const uint8_t byte1, const uint8_t byte2, std::index_sequence<valueIndex...>)
+        {
+            std::vector<binding::MatchingPatternType> boundValues;
+            bool hasMatch = true;
+            hasMatch &= internalMatch((byte1 & 0xF0) >> 4, pattern1, boundValues);
+            hasMatch &= internalMatch(byte1 & 0x0F, pattern2, boundValues);
+            hasMatch &= internalMatch((byte2 & 0xF0) >> 4, pattern3, boundValues);
+            hasMatch &= internalMatch(byte2 & 0x0F, pattern4, boundValues);
+
+            if (hasMatch)
             {
-                onMatch(value1, value2, value3, value4);
+                matchCallback(boundValues[valueIndex]...);
+                return true;
             }
+
+            return false;
         }
 
-      protected:
-        std::vector<BindingUnitType> bindArguments(const BindingUnitType value1,
-                                                   const BindingUnitType value2,
-                                                   const BindingUnitType value3,
-                                                   const BindingUnitType value4)
+        bool internalMatch(const binding::MatchingPatternType value,
+                           const binding::MatchingPatternType pattern,
+                           std::vector<binding::MatchingPatternType>& boundValues)
         {
-            std::vector<BindingUnitType> args;
-            addIfPlaceHolder(args, unit1, value1);
-            addIfPlaceHolder(args, unit2, value2);
-            addIfPlaceHolder(args, unit3, value3);
-            addIfPlaceHolder(args, unit4, value4);
-
-            return args;
-        }
-
-        virtual void onMatch(const BindingUnitType value1,
-                             const BindingUnitType value2,
-                             const BindingUnitType value3,
-                             const BindingUnitType value4) = 0;
-
-      private:
-        bool internalMatch(const BindingUnitType value1,
-                           const BindingUnitType value2,
-                           const BindingUnitType value3,
-                           const BindingUnitType value4)
-        {
-            bool match = true;
-            match &= matchUnitValue(unit1, value1);
-            match &= matchUnitValue(unit2, value2);
-            match &= matchUnitValue(unit3, value3);
-            match &= matchUnitValue(unit4, value4);
-
-            return match;
-        }
-
-        void addIfPlaceHolder(std::vector<BindingUnitType>& list, const BindingUnitType unit, const BindingUnitType value)
-        {
-            if (unit == placeholder)
+            if (binding::isPlaceholder(pattern))
             {
-                list.push_back(value);
+                boundValues.push_back(value);
+                return true;
             }
+
+            return value == pattern;
         }
 
-        bool matchUnitValue(const BindingUnitType unit, const BindingUnitType value)
-        {
-            return value == unit || unit == placeholder;
-        }
+        std::function<void(T...)> matchCallback;
     };
 
-    template <BindingUnitType unit1,
-              BindingUnitType unit2,
-              BindingUnitType unit3,
-              BindingUnitType unit4,
-              size_t NumberOfPlaceHolders>
-    class InstructionBinderDerived;
-
-    template <BindingUnitType unit1, BindingUnitType unit2, BindingUnitType unit3, BindingUnitType unit4>
-    class InstructionBinderDerived<unit1, unit2, unit3, unit4, 0> : public InstructionBinderBase<unit1, unit2, unit3, unit4>
+    template <binding::MatchingPatternType pattern1,
+              binding::MatchingPatternType pattern2,
+              binding::MatchingPatternType pattern3,
+              binding::MatchingPatternType pattern4,
+              uint8_t n,
+              class... T>
+    struct _InstructionBinderWrapper
     {
-      public:
-        InstructionBinderDerived(std::function<void()> f)
-        {
-            matchCallback = f;
-        }
-
-      protected:
-        void onMatch(const BindingUnitType value1,
-                     const BindingUnitType value2,
-                     const BindingUnitType value3,
-                     const BindingUnitType value4) override
-        {
-            matchCallback();
-        }
-
-      private:
-        std::function<void()> matchCallback;
+        using type = typename _InstructionBinderWrapper<pattern1, pattern2, pattern3, pattern4, n - 1, binding::MatchingPatternType, T...>::type;
     };
 
-    template <BindingUnitType unit1, BindingUnitType unit2, BindingUnitType unit3, BindingUnitType unit4>
-    class InstructionBinderDerived<unit1, unit2, unit3, unit4, 1> : public InstructionBinderBase<unit1, unit2, unit3, unit4>
+    template <binding::MatchingPatternType pattern1,
+              binding::MatchingPatternType pattern2,
+              binding::MatchingPatternType pattern3,
+              binding::MatchingPatternType pattern4,
+              class... T>
+    struct _InstructionBinderWrapper<pattern1, pattern2, pattern3, pattern4, 0, T...>
     {
-      public:
-        InstructionBinderDerived(std::function<void(BindingUnitType)> f)
-        {
-            matchCallback = f;
-        }
-
-      protected:
-        void onMatch(const BindingUnitType value1,
-                     const BindingUnitType value2,
-                     const BindingUnitType value3,
-                     const BindingUnitType value4) override
-        {
-            std::vector<BindingUnitType> args =
-                chip8::InstructionBinderBase<unit1, unit2, unit3, unit4>::bindArguments(value1, value2, value3, value4);
-            matchCallback(args[0]);
-        }
-
-      private:
-        std::function<void(BindingUnitType)> matchCallback;
+        using type = _InstructionBinder<pattern1, pattern2, pattern3, pattern4, T...>;
     };
 
-    template <BindingUnitType unit1, BindingUnitType unit2, BindingUnitType unit3, BindingUnitType unit4>
-    class InstructionBinderDerived<unit1, unit2, unit3, unit4, 2> : public InstructionBinderBase<unit1, unit2, unit3, unit4>
-    {
-      public:
-        InstructionBinderDerived(std::function<void(BindingUnitType, BindingUnitType)> f)
-        {
-            matchCallback = f;
-        }
-
-      protected:
-        void onMatch(const BindingUnitType value1,
-                     const BindingUnitType value2,
-                     const BindingUnitType value3,
-                     const BindingUnitType value4) override
-        {
-            std::vector<BindingUnitType> args =
-                chip8::InstructionBinderBase<unit1, unit2, unit3, unit4>::bindArguments(value1, value2, value3, value4);
-            matchCallback(args[0], args[1]);
-        }
-
-      private:
-        std::function<void(BindingUnitType, BindingUnitType)> matchCallback;
-    };
-
-    template <BindingUnitType unit1, BindingUnitType unit2, BindingUnitType unit3, BindingUnitType unit4>
-    class InstructionBinderDerived<unit1, unit2, unit3, unit4, 3> : public InstructionBinderBase<unit1, unit2, unit3, unit4>
-    {
-      public:
-        InstructionBinderDerived(std::function<void(BindingUnitType, BindingUnitType, BindingUnitType)> f)
-        {
-            matchCallback = f;
-        }
-
-      protected:
-        void onMatch(const BindingUnitType value1,
-                     const BindingUnitType value2,
-                     const BindingUnitType value3,
-                     const BindingUnitType value4) override
-        {
-            std::vector<BindingUnitType> args =
-                chip8::InstructionBinderBase<unit1, unit2, unit3, unit4>::bindArguments(value1, value2, value3, value4);
-            matchCallback(args[0], args[1], args[2]);
-        }
-
-      private:
-        std::function<void(BindingUnitType, BindingUnitType, BindingUnitType)> matchCallback;
-    };
-
-    template <BindingUnitType unit1, BindingUnitType unit2, BindingUnitType unit3, BindingUnitType unit4>
-    class InstructionBinderDerived<unit1, unit2, unit3, unit4, 4> : public InstructionBinderBase<unit1, unit2, unit3, unit4>
-    {
-      public:
-        InstructionBinderDerived(std::function<void(BindingUnitType, BindingUnitType, BindingUnitType, BindingUnitType)> f)
-        {
-            matchCallback = f;
-        }
-
-      protected:
-        void onMatch(const BindingUnitType value1,
-                     const BindingUnitType value2,
-                     const BindingUnitType value3,
-                     const BindingUnitType value4) override
-        {
-            std::vector<BindingUnitType> args =
-                chip8::InstructionBinderBase<unit1, unit2, unit3, unit4>::bindArguments(value1, value2, value3, value4);
-            matchCallback(args[0], args[1], args[2], args[3]);
-        }
-
-      private:
-        std::function<void(BindingUnitType, BindingUnitType, BindingUnitType, BindingUnitType)> matchCallback;
-    };
-
-    template <BindingUnitType unit1, BindingUnitType unit2, BindingUnitType unit3, BindingUnitType unit4>
+    template <binding::MatchingPatternType pattern1,
+              binding::MatchingPatternType pattern2,
+              binding::MatchingPatternType pattern3,
+              binding::MatchingPatternType pattern4>
     using InstructionBinder =
-        InstructionBinderDerived<unit1, unit2, unit3, unit4, numberOfPlaceHolders(unit1, unit2, unit3, unit4)>;
+        typename _InstructionBinderWrapper<pattern1, pattern2, pattern3, pattern4, binding::numberOfPlaceHolders(pattern1, pattern2, pattern3, pattern4)>::type;
 }

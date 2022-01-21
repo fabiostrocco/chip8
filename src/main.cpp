@@ -6,7 +6,9 @@
 #include "clparser/ArgumentFormatException.hpp"
 #include "clparser/ArgumentNotFoundException.hpp"
 #include "clparser/CommandLineParser.hpp"
+#include "emulator/CpuExecutionException.hpp"
 #include "emulator/Emulator.hpp"
+#include "emulator/RomLoadFailureException.hpp"
 #include "emulator/WindowInitializationException.hpp"
 #include "logging/Severity.hpp"
 #include "metadata.hpp"
@@ -53,6 +55,16 @@ int main(int argc, char* argv[])
     {
         logger.logError(windowFailure.what());
         return chip8::ExitCode::WindowInitializationFailure;
+    }
+    catch (chip8::RomLoadFailureException& romLoadFailure)
+    {
+        logger.logError(romLoadFailure.what());
+        return chip8::ExitCode::WindowInitializationFailure;
+    }
+    catch (chip8::CpuExecutionException& cpuError)
+    {
+        logger.logError(cpuError.what());
+        return chip8::ExitCode::CpuError;
     }
 
     return chip8::ExitCode::Success;

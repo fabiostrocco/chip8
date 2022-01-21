@@ -173,6 +173,7 @@
     <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(EmulatorDir)AudioController.cpp" />
     <ClCompile Include="$(EmulatorDir)Cpu.cpp" />
     <ClCompile Include="$(EmulatorDir)Emulator.cpp" />
     <ClCompile Include="$(EmulatorDir)EmulatorWindow.cpp" />
@@ -204,17 +205,25 @@
     <ClInclude Include="$(LoggingDir)Severity.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(EmulatorDir)AudioController.hpp" />
+    <ClInclude Include="$(EmulatorDir)AudioException.hpp" />
     <ClInclude Include="$(EmulatorDir)Cpu.hpp" />
+    <ClInclude Include="$(EmulatorDir)CpuExecutionException.hpp" />
     <ClInclude Include="$(EmulatorDir)Emulator.hpp" />
     <ClInclude Include="$(EmulatorDir)EmulatorWindow.hpp" />
+    <ClInclude Include="$(EmulatorDir)Font.hpp" />
     <ClInclude Include="$(EmulatorDir)Gpu.hpp" />
-    <ClInclude Include="$(EmulatorDir)ICpu.hpp" />
-    <ClInclude Include="$(EmulatorDir)IFrameBuffer.hpp" />
+    <ClInclude Include="$(EmulatorDir)IBinder.hpp" />
+    <ClInclude Include="$(EmulatorDir)InstructionBinding.hpp" />
     <ClInclude Include="$(EmulatorDir)IGpu.hpp" />
     <ClInclude Include="$(EmulatorDir)InstructionBinder.hpp" />
     <ClInclude Include="$(EmulatorDir)InstructionSet.hpp" />
+    <ClInclude Include="$(EmulatorDir)Key.hpp" />
 	<ClInclude Include="$(EmulatorDir)ITimer.hpp" />
+	<ClInclude Include="$(EmulatorDir)PointerRegister.hpp" />
     <ClInclude Include="$(EmulatorDir)Registers.hpp" />
+    <ClInclude Include="$(EmulatorDir)RomLoadFailureException.hpp" />
+	<ClInclude Include="$(EmulatorDir)SDLChip8KeyMapping.hpp" />
     <ClInclude Include="$(EmulatorDir)Timer.hpp" />
     <ClInclude Include="$(EmulatorDir)WindowInitializationException.hpp" />
   </ItemGroup>

@@ -61,6 +61,8 @@
   <ItemGroup>
     <ClCompile Include="$(TestDir)CommandLineParserUnitTests.cpp" />
     <ClCompile Include="$(TestDir)CommandLineParserIntegrationTests.cpp" />
+    <ClCompile Include="$(TestDir)CpuUnitTests.cpp" />
+    <ClCompile Include="$(TestDir)GpuUnitTests.cpp" />
     <ClCompile Include="$(TestDir)InstructionBinderUnitTests.cpp" />
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\gtest-all.cc" />
     <ClCompile Include="packages\gmock.1.11.0\lib\native\src\gtest\src\gtest_main.cc" />
@@ -71,19 +73,8 @@
     <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)CommandLineOptions.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)Argument.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)IArgument.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)IArgumentVisitor.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)ICommandLineOptions.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)NamedArgument.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)PositionalArgument.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="$(EmulatorDir)InstructionBinder.hpp" />
+	<ClCompile Include="$(EmulatorDir)Cpu.cpp" />
+	<ClCompile Include="$(EmulatorDir)Gpu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\vs\chip8.vcxproj">
