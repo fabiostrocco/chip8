@@ -34,29 +34,30 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <TestDir>..\..\test\</TestDir>
-    <SrcDir>..\..\src\</SrcDir>
+    <SrcDir>..\..\lib\</SrcDir>
+	<IncludeDir>..\..\include\</IncludeDir>
     <CommandLineParserDir>$(SrcDir)\clparser\</CommandLineParserDir>
-	<EmulatorDir>$(SrcDir)\emulator\</EmulatorDir>
+    <CpuDir>$(SrcDir)\Cpu\</CpuDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
-    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
+    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludeDir)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
-    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
+    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludeDir)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
-    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
+    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludeDir)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
-    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SrcDir)</IncludePath>
+    <IncludePath>packages\gmock.1.11.0\lib\native\include;packages\gmock.1.11.0\lib\native\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludeDir)</IncludePath>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="$(TestDir)CommandLineParserUnitTests.cpp" />
@@ -73,8 +74,8 @@
     <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp" />
   </ItemGroup>
   <ItemGroup>
-	<ClCompile Include="$(EmulatorDir)Cpu.cpp" />
-	<ClCompile Include="$(EmulatorDir)Gpu.cpp" />
+    <ClCompile Include="$(CpuDir)Cpu.cpp" />
+    <ClCompile Include="$(CpuDir)Gpu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\vs\chip8.vcxproj">

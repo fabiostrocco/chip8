@@ -1,8 +1,7 @@
-#include "CommandLineOptions.hpp"
+#include "clparser/CommandLineOptions.hpp"
 
+#include <clparser/Argument.hpp>
 #include <sstream>
-
-#include "Argument.hpp"
 
 void clparser::CommandLineOptions::addArgument(clparser::IArgument& argument)
 {
@@ -79,8 +78,7 @@ void clparser::CommandLineOptions::HelpMessageBuilder::visitNamedArgument(const 
 
     argumentStream << " ";
 
-    guideStream << "\t" << clparser::LongNamePrefix << longName << ", " << clparser::ShortNamePrefix << shortName << "\t"
-                << description;
+    guideStream << "\t" << clparser::LongNamePrefix << longName << ", " << clparser::ShortNamePrefix << shortName << "\t" << description;
 
     if (defaultValue.has_value())
     {

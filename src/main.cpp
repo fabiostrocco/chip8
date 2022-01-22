@@ -1,16 +1,18 @@
 //#include <SDL.h>
 
+#include <clparser/ArgumentFormatException.hpp>
+#include <clparser/ArgumentNotFoundException.hpp>
+#include <clparser/CommandLineParser.hpp>
+#include <cpu/CpuExecutionException.hpp>
+#include <cpu/RomLoadFailureException.hpp>
+#include <emulator/AudioInitializationException.hpp>
+#include <emulator/Emulator.hpp>
+#include <emulator/WindowInitializationException.hpp>
+#include <logging/Severity.hpp>
+
 #include "CommandLineOptions.hpp"
 #include "ExitCode.hpp"
 #include "Logger.hpp"
-#include "clparser/ArgumentFormatException.hpp"
-#include "clparser/ArgumentNotFoundException.hpp"
-#include "clparser/CommandLineParser.hpp"
-#include "emulator/CpuExecutionException.hpp"
-#include "emulator/Emulator.hpp"
-#include "emulator/RomLoadFailureException.hpp"
-#include "emulator/WindowInitializationException.hpp"
-#include "logging/Severity.hpp"
 #include "metadata.hpp"
 
 int main(int argc, char* argv[])
@@ -37,7 +39,7 @@ int main(int argc, char* argv[])
         logger.setVerbose(options.verbose());
 
         chip8::Emulator emulator(logger, options.romName());
-        emulator.run();
+        emulator.run(chip8::metadata::ProgramName);
     }
     catch (clparser::ArgumentNotFoundException& argNotFound)
     {
@@ -56,10 +58,15 @@ int main(int argc, char* argv[])
         logger.logError(windowFailure.what());
         return chip8::ExitCode::WindowInitializationFailure;
     }
+    catch (chip8::AudioInitializationException& audioFailure)
+    {
+        logger.logError(audioFailure.what());
+        return chip8::ExitCode::AudioInitializationFailure;
+    }
     catch (chip8::RomLoadFailureException& romLoadFailure)
     {
         logger.logError(romLoadFailure.what());
-        return chip8::ExitCode::WindowInitializationFailure;
+        return chip8::ExitCode::RomLoadFailure;
     }
     catch (chip8::CpuExecutionException& cpuError)
     {

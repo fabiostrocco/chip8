@@ -72,25 +72,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\src;.\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\include;.\SDL2\include;$(IncludePath)</IncludePath>
     <LibraryPath>.\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>$(SrcDir)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\..\src;.\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\include;.\SDL2\include;$(IncludePath)</IncludePath>
     <LibraryPath>.\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>$(SrcDir)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\src;.\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\include;.\SDL2\include;$(IncludePath)</IncludePath>
     <LibraryPath>.\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>$(SrcDir)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\..\src;.\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\include;.\SDL2\include;$(IncludePath)</IncludePath>
     <LibraryPath>.\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>$(SrcDir)</PublicIncludeDirectories>
   </PropertyGroup>
@@ -158,75 +158,97 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  
+  <ItemGroup>
+    <Filter Include="ciao"/>
+  </ItemGroup>
+  
   <PropertyGroup>
+    <IncludeDir>..\..\include\</IncludeDir>
+    <LibDir>..\..\lib\</LibDir>
     <SrcDir>..\..\src\</SrcDir>
-    <CommandLineParserDir>$(SrcDir)\clparser\</CommandLineParserDir>
-    <LoggingDir>$(SrcDir)\logging\</LoggingDir>
-    <EmulatorDir>$(SrcDir)\emulator\</EmulatorDir>
+	
+    <CommandLineParserDir>clparser\</CommandLineParserDir>
+    <CpuDir>cpu\</CpuDir>
+    <LoggingDir>logging\</LoggingDir>
+    <EmulatorDir>emulator\</EmulatorDir>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="$(SrcDir)main.cpp" />
     <ClCompile Include="$(SrcDir)Logger.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="$(CommandLineParserDir)CommandLineOptions.cpp" />
-    <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="$(EmulatorDir)AudioController.cpp" />
-    <ClCompile Include="$(EmulatorDir)Cpu.cpp" />
-    <ClCompile Include="$(EmulatorDir)Emulator.cpp" />
-    <ClCompile Include="$(EmulatorDir)EmulatorWindow.cpp" />
-    <ClCompile Include="$(EmulatorDir)Gpu.cpp" />
-    <ClCompile Include="$(EmulatorDir)Timer.cpp" />
-  </ItemGroup>
+  
   <ItemGroup>
     <ClInclude Include="$(SrcDir)Logger.hpp" />
     <ClInclude Include="$(SrcDir)CommandLineOptions.hpp" />
     <ClInclude Include="$(SrcDir)ExitCode.hpp" />
     <ClInclude Include="$(SrcDir)metadata.hpp" />
   </ItemGroup>
+  
   <ItemGroup>
-    <ClInclude Include="$(CommandLineParserDir)ArgumentConcept.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)CommandLineOptions.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)Argument.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)IArgument.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)IArgumentVisitor.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)ICommandLineOptions.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)NamedArgument.hpp" />
-    <ClInclude Include="$(CommandLineParserDir)PositionalArgument.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)Argument.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)ArgumentConcept.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)ArgumentFormatException.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)CommandLineOptions.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)CommandLineParser.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)IArgument.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)IArgumentVisitor.hpp" /> 
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)ICommandLineOptions.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)NamedArgument.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)PositionalArgument.hpp" />
   </ItemGroup>
+
   <ItemGroup>
-    <ClInclude Include="$(LoggingDir)Logger.hpp" />
-    <ClInclude Include="$(LoggingDir)LoggerConcept.hpp" />
-    <ClInclude Include="$(LoggingDir)Severity.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Cpu.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)CpuExecutionException.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Font.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Gpu.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)IGpu.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)IBinder.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)InstructionBinding.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)InstructionBinder.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)InstructionSet.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)ITimer.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Key.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)PointerRegister.hpp" /> 
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Registers.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)RomLoadFailureException.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Timer.hpp" />
   </ItemGroup>
+  
   <ItemGroup>
-    <ClInclude Include="$(EmulatorDir)AudioController.hpp" />
-    <ClInclude Include="$(EmulatorDir)AudioException.hpp" />
-    <ClInclude Include="$(EmulatorDir)Cpu.hpp" />
-    <ClInclude Include="$(EmulatorDir)CpuExecutionException.hpp" />
-    <ClInclude Include="$(EmulatorDir)Emulator.hpp" />
-    <ClInclude Include="$(EmulatorDir)EmulatorWindow.hpp" />
-    <ClInclude Include="$(EmulatorDir)Font.hpp" />
-    <ClInclude Include="$(EmulatorDir)Gpu.hpp" />
-    <ClInclude Include="$(EmulatorDir)IBinder.hpp" />
-    <ClInclude Include="$(EmulatorDir)InstructionBinding.hpp" />
-    <ClInclude Include="$(EmulatorDir)IGpu.hpp" />
-    <ClInclude Include="$(EmulatorDir)InstructionBinder.hpp" />
-    <ClInclude Include="$(EmulatorDir)InstructionSet.hpp" />
-    <ClInclude Include="$(EmulatorDir)Key.hpp" />
-	<ClInclude Include="$(EmulatorDir)ITimer.hpp" />
-	<ClInclude Include="$(EmulatorDir)PointerRegister.hpp" />
-    <ClInclude Include="$(EmulatorDir)Registers.hpp" />
-    <ClInclude Include="$(EmulatorDir)RomLoadFailureException.hpp" />
-	<ClInclude Include="$(EmulatorDir)SDLChip8KeyMapping.hpp" />
-    <ClInclude Include="$(EmulatorDir)Timer.hpp" />
-    <ClInclude Include="$(EmulatorDir)WindowInitializationException.hpp" />
+    <ClInclude Include="$(IncludeDir)$(EmulatorDir)AudioInitializationException.hpp" />
+    <ClInclude Include="$(IncludeDir)$(EmulatorDir)Emulator.hpp" />
+    <ClInclude Include="$(IncludeDir)$(EmulatorDir)WindowInitializationException.hpp" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ClInclude Include="$(IncludeDir)$(LoggingDir)Logger.hpp" />
+    <ClInclude Include="$(IncludeDir)$(LoggingDir)LoggerConcept.hpp" />
+    <ClInclude Include="$(IncludeDir)$(LoggingDir)Severity.hpp" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ClCompile Include="$(LibDir)$(CommandLineParserDir)CommandLineOptions.cpp" />
+    <ClCompile Include="$(LibDir)$(CommandLineParserDir)CommandLineParser.cpp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ClCompile Include="$(LibDir)$(CpuDir)Cpu.cpp" />
+    <ClCompile Include="$(LibDir)$(CpuDir)Gpu.cpp" />
+    <ClCompile Include="$(LibDir)$(CpuDir)Timer.cpp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ClCompile Include="$(LibDir)$(EmulatorDir)AudioController.cpp" />
+    <ClCompile Include="$(LibDir)$(EmulatorDir)Emulator.cpp" />
+    <ClCompile Include="$(LibDir)$(EmulatorDir)EmulatorWindow.cpp" />
+    <CLInclude Include="$(LibDir)$(EmulatorDir)AudioController.hpp" />
+    <CLInclude Include="$(LibDir)$(EmulatorDir)EmulatorWindow.hpp" />
+    <CLInclude Include="$(LibDir)$(EmulatorDir)SDLChip8KeyMapping.hpp" />
+
+  </ItemGroup>
+  
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

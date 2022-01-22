@@ -1,8 +1,8 @@
 #include "AudioController.hpp"
 
+#include <cmath>
+#include <emulator/AudioInitializationException.hpp>
 #include <numbers>
-
-#include "AudioException.hpp"
 
 void chip8::audio_callback(void* userData, Uint8* rawBuffer, int bufferLength)
 {
@@ -13,7 +13,7 @@ void chip8::audio_callback(void* userData, Uint8* rawBuffer, int bufferLength)
     for (size_t i = 0; i < numberOfSamples; i++, sampleNumber++)
     {
         const double time = static_cast<double>(sampleNumber) / static_cast<double>(AudioController::SampleRate);
-        buffer[i] = static_cast<SampleType>(AudioController::Amplitude * sin(2.0f * std::numbers::pi * AudioController::Frequency * time));
+        buffer[i] = static_cast<SampleType>(AudioController::Amplitude * std::sin(2.0f * std::numbers::pi * AudioController::Frequency * time));
     }
 }
 
@@ -30,7 +30,7 @@ chip8::AudioController::AudioController()
     audioDeviceId = SDL_OpenAudioDevice(nullptr, false, &audioDeviceDesiredSpecs, &audioDeviceObtainedSpecs, 0);
     if (audioDeviceId == 0)
     {
-        throw chip8::AudioException("Cannot open default audio device " + std::string(SDL_GetError()));
+        throw chip8::AudioInitializationException("Cannot open default audio device " + std::string(SDL_GetError()));
     }
 }
 

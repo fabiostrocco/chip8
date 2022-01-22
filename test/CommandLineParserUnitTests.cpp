@@ -1,10 +1,9 @@
+#include <clparser/IArgument.hpp>
+#include <clparser/ICommandLineOptions.hpp>
+#include <clparser/NamedArgument.hpp>
+#include <clparser/PositionalArgument.hpp>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-
-#include "clparser/IArgument.hpp"
-#include "clparser/ICommandLineOptions.hpp"
-#include "clparser/NamedArgument.hpp"
-#include "clparser/PositionalArgument.hpp"
 
 class MockCommandLineOptions : public clparser::ICommandLineOptions
 {

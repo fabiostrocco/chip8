@@ -7,7 +7,8 @@ namespace chip8
         Success = 0,
         CommandLineArgsParseError = 1,
         WindowInitializationFailure = 2,
-        RomLoadFailure = 3,
-        CpuError = 4
+        AudioInitializationFailure = 3,
+        RomLoadFailure = 4,
+        CpuError = 5
     };
 }

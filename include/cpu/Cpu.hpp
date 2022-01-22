@@ -2,6 +2,7 @@
 
 #include <array>
 #include <istream>
+#include <logging/Logger.hpp>
 #include <memory>
 #include <random>
 
@@ -10,7 +11,6 @@
 #include "InstructionSet.hpp"
 #include "Key.hpp"
 #include "Registers.hpp"
-#include "logging/Logger.hpp"
 
 namespace chip8
 {
@@ -30,7 +30,7 @@ namespace chip8
         size_t getHeight() const;
         const std::vector<bool>& getFrameBuffer() const;
 
-        Registers& getRegisters();
+        chip8::Registers& getRegisters();
 
       private:
         static constexpr size_t MemorySize = 4 * 1204; // 4KB

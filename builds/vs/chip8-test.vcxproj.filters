@@ -45,11 +45,11 @@
     </ClCompile>
     <ClCompile Include="$(TestDir)CpuUnitTests.cpp" />
     <ClCompile Include="$(TestDir)InstructionBinderUnitTests.cpp" />
-    <ClCompile Include="$(EmulatorDir)Cpu.cpp">
+    <ClCompile Include="$(TestDir)GpuUnitTests.cpp" />
+    <ClCompile Include="$(CpuDir)Cpu.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="$(TestDir)GpuUnitTests.cpp" />
-    <ClCompile Include="$(EmulatorDir)Gpu.cpp">
+    <ClCompile Include="$(CpuDir)Gpu.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,4 +1,4 @@
-#include "Gpu.hpp"
+#include "cpu/Gpu.hpp"
 
 chip8::Gpu::Gpu(const logging::Logger& logger)
     : logger(logger)

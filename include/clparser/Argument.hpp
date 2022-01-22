@@ -18,8 +18,7 @@ namespace clparser
     class Argument : public clparser::IArgument
     {
       protected:
-        Argument(clparser::ICommandLineOptions& options,
-                 std::optional<ArgumentType> defaultValue) requires(!std::is_same<ArgumentType, bool>::value)
+        Argument(clparser::ICommandLineOptions& options, std::optional<ArgumentType> defaultValue) requires(!std::is_same<ArgumentType, bool>::value)
             : storage(std::nullopt)
             , defaultValue(defaultValue)
             , index(options.getArguments().size())
@@ -59,8 +58,7 @@ namespace clparser
             // If internalMatch terminates without exception, storage must be initialized.
             if (!storage.has_value())
             {
-                throw std::logic_error(
-                    "Uninitialized successfully matched field: setStorage() must be called when a field is sucecssfully matched");
+                throw std::logic_error("Uninitialized successfully matched field: setStorage() must be called when a field is sucecssfully matched");
             }
         }
 

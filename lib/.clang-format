@@ -1,0 +1,43 @@
+BasedOnStyle: LLVM
+
+ColumnLimit: 160
+IndentWidth: 4
+TabWidth: 4
+UseTab: false
+
+AllowShortFunctionsOnASingleLine: None
+AllowShortLambdasOnASingleLine: Inline
+
+BinPackArguments: false
+BinPackParameters: false
+
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllConstructorInitializersOnNextLine: false
+AllowAllArgumentsOnNextLine: false
+
+AlignAfterOpenBracket: Align
+
+BreakBeforeBraces: Allman
+BreakConstructorInitializersBeforeComma: true
+
+IndentCaseLabels: false
+NamespaceIndentation: All
+PointerAlignment: Left
+AlwaysBreakTemplateDeclarations: Yes
+AlignConsecutiveMacros: true
+FixNamespaceComments: false
+
+IncludeBlocks: Regroup
+SortIncludes: true
+IncludeCategories:
+  - Regex:           '<'
+    Priority:        1
+    SortPriority:    1
+    CaseSensitive:   true
+  - Regex:           '"'
+    Priority:        2
+    SortPriority:    2
+    CaseSensitive:   true
+  - Regex:           '.*'
+    Priority:        3
+    SortPriority:    3

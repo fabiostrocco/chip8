@@ -1,18 +1,17 @@
 #include "EmulatorWindow.hpp"
 
 #include <SDL_events.h>
+#include <cpu/InstructionBinder.hpp>
+#include <emulator/WindowInitializationException.hpp>
 
-#include "InstructionBinder.hpp"
 #include "SDLChip8KeyMapping.hpp"
-#include "WindowInitializationException.hpp"
-#include "metadata.hpp"
 
-chip8::EmulatorWindow::EmulatorWindow(const logging::Logger& logger, chip8::Cpu& cpu)
+chip8::EmulatorWindow::EmulatorWindow(const logging::Logger& logger, chip8::Cpu& cpu, const std::string& programName)
     : logger(logger)
     , cpu(cpu)
 {
     logger.logDebug("Initializing emulator window...");
-    init();
+    init(programName);
     logger.logDebug("Emulator window initialized.");
 }
 
@@ -35,9 +34,8 @@ void chip8::EmulatorWindow::run()
     }
 }
 
-void chip8::EmulatorWindow::init()
+void chip8::EmulatorWindow::init(const std::string& programName)
 {
-    const std::string programName = chip8::metadata::ProgramName;
     const std::string windowTitle = programName + " emulator";
 
     static constexpr size_t WindowWidth = 640;
@@ -115,7 +113,7 @@ bool chip8::EmulatorWindow::processEvents()
 void chip8::EmulatorWindow::loop()
 {
     cpu.runClockCycle();
-    
+
     if (cpu.shouldPlayAudio())
     {
         audioController.play();

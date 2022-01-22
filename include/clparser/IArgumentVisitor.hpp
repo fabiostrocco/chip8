@@ -13,8 +13,6 @@ namespace clparser
                                         const bool isFlag,
                                         const std::optional<std::string> defaultValue) = 0;
 
-        virtual void visitPositionalArgument(const std::string& name,
-                                             const size_t position,
-                                             const std::optional<std::string> defaultValue) = 0;
+        virtual void visitPositionalArgument(const std::string& name, const size_t position, const std::optional<std::string> defaultValue) = 0;
     };
 }

@@ -2,12 +2,12 @@
 #include <gtest/gtest.h>
 #include <string>
 
-#include "clparser/Argument.hpp"
-#include "clparser/CommandLineOptions.hpp"
-#include "clparser/CommandLineParser.hpp"
-#include "clparser/ICommandLineOptions.hpp"
-#include "clparser/NamedArgument.hpp"
-#include "clparser/PositionalArgument.hpp"
+#include <clparser/Argument.hpp>
+#include <clparser/CommandLineOptions.hpp>
+#include <clparser/CommandLineParser.hpp>
+#include <clparser/ICommandLineOptions.hpp>
+#include <clparser/NamedArgument.hpp>
+#include <clparser/PositionalArgument.hpp>
 
 class EmptyTestOptions : public clparser::CommandLineOptions
 {

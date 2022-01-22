@@ -1,9 +1,9 @@
 #pragma once
 
 #include <SDL_render.h>
+#include <cpu/Cpu.hpp>
 
 #include "AudioController.hpp"
-#include "Cpu.hpp"
 #include "logging/Logger.hpp"
 
 namespace chip8
@@ -11,13 +11,13 @@ namespace chip8
     class EmulatorWindow
     {
       public:
-        EmulatorWindow(const logging::Logger& logger, chip8::Cpu& cpu);
+        EmulatorWindow(const logging::Logger& logger, chip8::Cpu& cpu, const std::string& programName);
         ~EmulatorWindow();
 
         void run();
 
       private:
-        void init();
+        void init(const std::string& programName);
         bool processEvents();
         void loop();
         void clearRenderer();

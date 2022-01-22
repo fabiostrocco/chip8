@@ -1,15 +1,15 @@
-#include "Emulator.hpp"
-
 #include <SDL.h>
+#include <cpu/Cpu.hpp>
+#include <cpu/Gpu.hpp>
+#include <cpu/RomLoadFailureException.hpp>
+#include <cpu/Timer.hpp>
+#include <emulator/Emulator.hpp>
 #include <filesystem>
 #include <fstream>
 #include <memory>
 #include <string>
 
-#include "Cpu.hpp"
-#include "Gpu.hpp"
-#include "RomLoadFailureException.hpp"
-#include "Timer.hpp"
+#include "EmulatorWindow.hpp"
 
 chip8::Emulator::Emulator(const logging::Logger& logger, const std::string& romFileName)
     : logger(logger)
@@ -29,7 +29,7 @@ chip8::Emulator::~Emulator()
 
 #include "AudioController.hpp"
 
-void chip8::Emulator::run()
+void chip8::Emulator::run(const std::string& programName)
 {
     chip8::Gpu gpu(logger);
     chip8::Timer soundTimer;
@@ -39,7 +39,7 @@ void chip8::Emulator::run()
     std::unique_ptr<std::ifstream> romData = loadRom();
     cpu.boot(*romData);
 
-    EmulatorWindow window(logger, cpu);
+    chip8::EmulatorWindow window(logger, cpu, programName);
     window.run();
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "logging/Logger.hpp"
+#include <logging/Logger.hpp>
 
 namespace chip8
 {

@@ -51,11 +51,7 @@ namespace clparser
         void accept(clparser::IArgumentVisitor& visitor) override
         {
             auto defaultValueString = clparser::Argument<ArgumentType>::getDefaultValueString();
-            visitor.visitNamedArgument(shortName,
-                                       longName,
-                                       description,
-                                       std::is_same<ArgumentType, bool>::value,
-                                       defaultValueString);
+            visitor.visitNamedArgument(shortName, longName, description, std::is_same<ArgumentType, bool>::value, defaultValueString);
         }
 
       protected:
@@ -65,8 +61,7 @@ namespace clparser
 
             auto it = std::find_if(arguments.begin(),
                                    arguments.end(),
-                                   [&](const std::string& arg)
-                                   { return arg == ShortNamePrefix + shortName || arg == LongNamePrefix + longName; });
+                                   [&](const std::string& arg) { return arg == ShortNamePrefix + shortName || arg == LongNamePrefix + longName; });
 
             const std::string longNameComplete = LongNamePrefix + longName;
 

@@ -2,155 +2,169 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="$(SrcDir)main.cpp" />
-    <ClCompile Include="$(CommandLineParserDir)CommandLineOptions.cpp">
-      <Filter>clparser</Filter>
-    </ClCompile>
-    <ClCompile Include="$(CommandLineParserDir)CommandLineParser.cpp">
-      <Filter>clparser</Filter>
-    </ClCompile>
-    <ClCompile Include="$(EmulatorDir)Emulator.cpp">
-      <Filter>emulator</Filter>
-    </ClCompile>
     <ClCompile Include="$(SrcDir)Logger.cpp" />
-    <ClCompile Include="$(EmulatorDir)Cpu.cpp">
-      <Filter>emulator</Filter>
+    <ClCompile Include="$(LibDir)$(CommandLineParserDir)CommandLineOptions.cpp">
+      <Filter>lib\clparser</Filter>
     </ClCompile>
-    <ClCompile Include="$(EmulatorDir)EmulatorWindow.cpp">
-      <Filter>emulator</Filter>
+    <ClCompile Include="$(LibDir)$(CommandLineParserDir)CommandLineParser.cpp">
+      <Filter>lib\clparser</Filter>
     </ClCompile>
-    <ClCompile Include="$(EmulatorDir)Gpu.cpp">
-      <Filter>emulator</Filter>
+    <ClCompile Include="$(LibDir)$(CpuDir)Cpu.cpp">
+      <Filter>lib\cpu</Filter>
     </ClCompile>
-    <ClCompile Include="$(EmulatorDir)Timer.cpp">
-      <Filter>emulator</Filter>
+    <ClCompile Include="$(LibDir)$(CpuDir)Timer.cpp">
+      <Filter>lib\cpu</Filter>
     </ClCompile>
-    <ClCompile Include="$(EmulatorDir)AudioController.cpp">
-      <Filter>emulator</Filter>
+    <ClCompile Include="$(LibDir)$(CpuDir)Gpu.cpp">
+      <Filter>lib\cpu</Filter>
+    </ClCompile>
+    <ClCompile Include="$(LibDir)$(EmulatorDir)AudioController.cpp">
+      <Filter>lib\emulator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(LibDir)$(EmulatorDir)Emulator.cpp">
+      <Filter>lib\emulator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(LibDir)$(EmulatorDir)EmulatorWindow.cpp">
+      <Filter>lib\emulator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="clparser">
-      <UniqueIdentifier>{498b898e-7468-4e00-ac16-668fa2afd0cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="logging">
-      <UniqueIdentifier>{f13a913e-51ba-470a-8955-d7405e3b217b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="emulator">
-      <UniqueIdentifier>{6ee6f479-c402-4780-96a2-e0f81672e496}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="$(CommandLineParserDir)CommandLineOptions.hpp">
-      <Filter>clparser</Filter>
+    <ClInclude Include="$(SrcDir)metadata.hpp" />
+    <ClInclude Include="$(SrcDir)ExitCode.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)Argument.hpp">
+      <Filter>include\clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)CommandLineParser.hpp">
-      <Filter>clparser</Filter>
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)ArgumentConcept.hpp">
+      <Filter>include\clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)ArgumentNotFoundException.hpp">
-      <Filter>clparser</Filter>
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)ArgumentFormatException.hpp">
+      <Filter>include\clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)ICommandLineOptions.hpp">
-      <Filter>clparser</Filter>
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)CommandLineOptions.hpp">
+      <Filter>include\clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)Argument.hpp">
-      <Filter>clparser</Filter>
+    <ClInclude Include="$(SrcDir)CommandLineOptions.hpp">
+      <Filter>include\clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)IArgument.hpp">
-      <Filter>clparser</Filter>
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)CommandLineParser.hpp">
+      <Filter>include\clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)NamedArgument.hpp">
-      <Filter>clparser</Filter>
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)PositionalArgument.hpp">
+      <Filter>include\clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)PositionalArgument.hpp">
-      <Filter>clparser</Filter>
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)NamedArgument.hpp">
+      <Filter>include\clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)IArgumentVisitor.hpp">
-      <Filter>clparser</Filter>
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)IArgument.hpp">
+      <Filter>include\clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)ArgumentConcept.hpp">
-      <Filter>clparser</Filter>
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)IArgumentVisitor.hpp">
+      <Filter>include\clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(LoggingDir)LoggerConcept.hpp">
-      <Filter>logging</Filter>
+    <ClInclude Include="$(IncludeDir)$(CommandLineParserDir)ICommandLineOptions.hpp">
+      <Filter>include\clparser</Filter>
     </ClInclude>
-    <ClInclude Include="$(LoggingDir)Logger.hpp">
-      <Filter>logging</Filter>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Cpu.hpp">
+      <Filter>include\cpu</Filter>
     </ClInclude>
-    <ClInclude Include="$(LoggingDir)Severity.hpp">
-      <Filter>logging</Filter>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)CpuExecutionException.hpp">
+      <Filter>include\cpu</Filter>
     </ClInclude>
-    <ClInclude Include="$(EmulatorDir)Emulator.hpp">
-      <Filter>emulator</Filter>
+    <ClInclude Include="$(IncludeDir)$(EmulatorDir)Emulator.hpp">
+      <Filter>include\emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Gpu.hpp">
+      <Filter>include\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)IGpu.hpp">
+      <Filter>include\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)InstructionSet.hpp">
+      <Filter>include\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)ITimer.hpp">
+      <Filter>include\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="$(IncludeDir)$(EmulatorDir)WindowInitializationException.hpp">
+      <Filter>include\emulator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Timer.hpp">
+      <Filter>include\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)PointerRegister.hpp">
+      <Filter>include\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Registers.hpp">
+      <Filter>include\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)RomLoadFailureException.hpp">
+      <Filter>include\cpu</Filter>
     </ClInclude>
     <ClInclude Include="$(SrcDir)Logger.hpp" />
-    <ClInclude Include="$(SrcDir)CommandLineOptions.hpp" />
-    <ClInclude Include="$(SrcDir)metadata.hpp" />
-    <ClInclude Include="$(EmulatorDir)Cpu.hpp">
-      <Filter>emulator</Filter>
+    <ClInclude Include="$(IncludeDir)$(LoggingDir)Logger.hpp">
+      <Filter>include\logging</Filter>
     </ClInclude>
-    <ClInclude Include="$(EmulatorDir)EmulatorWindow.hpp">
-      <Filter>emulator</Filter>
+    <ClInclude Include="$(IncludeDir)$(LoggingDir)LoggerConcept.hpp">
+      <Filter>include\logging</Filter>
     </ClInclude>
-    <ClInclude Include="$(EmulatorDir)Gpu.hpp">
-      <Filter>emulator</Filter>
+    <ClInclude Include="$(IncludeDir)$(LoggingDir)Severity.hpp">
+      <Filter>include\logging</Filter>
     </ClInclude>
-    <ClInclude Include="$(EmulatorDir)ICpu.hpp">
-      <Filter>emulator</Filter>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Key.hpp">
+      <Filter>include\cpu</Filter>
     </ClInclude>
-    <ClInclude Include="$(EmulatorDir)IGpu.hpp">
-      <Filter>emulator</Filter>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)Font.hpp">
+      <Filter>include\cpu</Filter>
     </ClInclude>
-    <ClInclude Include="$(EmulatorDir)Registers.hpp">
-      <Filter>emulator</Filter>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)InstructionBinder.hpp">
+      <Filter>include\cpu</Filter>
     </ClInclude>
-    <ClInclude Include="$(EmulatorDir)Timer.hpp">
-      <Filter>emulator</Filter>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)InstructionBinding.hpp">
+      <Filter>include\cpu</Filter>
     </ClInclude>
-    <ClInclude Include="$(EmulatorDir)ITimer.hpp">
-      <Filter>emulator</Filter>
+    <CLInclude Include="$(LibDir)$(EmulatorDir)AudioController.hpp">
+      <Filter>lib\emulator</Filter>
+    </CLInclude>
+    <CLInclude Include="$(LibDir)$(EmulatorDir)EmulatorWindow.hpp">
+      <Filter>lib\emulator</Filter>
+    </CLInclude>
+    <CLInclude Include="$(LibDir)$(EmulatorDir)SDLChip8KeyMapping.hpp">
+      <Filter>lib\emulator</Filter>
+    </CLInclude>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)IBinder.hpp">
+      <Filter>include\cpu</Filter>
     </ClInclude>
-    <ClInclude Include="$(EmulatorDir)WindowInitializationException.hpp">
-      <Filter>emulator</Filter>
+    <ClInclude Include="$(IncludeDir)$(EmulatorDir)AudioInitializationException.hpp">
+      <Filter>include\emulator</Filter>
     </ClInclude>
-    <ClInclude Include="$(EmulatorDir)InstructionBinder.hpp">
-      <Filter>emulator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SrcDir)ExitCode.hpp">
-      <Filter>clparser</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EmulatorDir)InstructionSet.hpp">
-      <Filter>emulator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EmulatorDir)RomLoadFailureException.hpp">
-      <Filter>emulator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(CommandLineParserDir)ArgumentFormatException.hpp">
-      <Filter>clparser</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EmulatorDir)CpuExecutionException.hpp">
-      <Filter>emulator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EmulatorDir)IBinder.hpp" />
-    <ClInclude Include="$(EmulatorDir)InstructionBinding.hpp">
-      <Filter>emulator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EmulatorDir)PointerRegister.hpp">
-      <Filter>emulator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EmulatorDir)Key.hpp">
-      <Filter>emulator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EmulatorDir)Font.hpp">
-      <Filter>emulator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EmulatorDir)SDLChip8KeyMapping.hpp">
-      <Filter>emulator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EmulatorDir)AudioController.hpp">
-      <Filter>emulator</Filter>
-    </ClInclude>
-    <ClInclude Include="$(EmulatorDir)AudioException.hpp">
-      <Filter>emulator</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{c5ea6b0a-aafe-4374-8e67-1410895b0af4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\clparser">
+      <UniqueIdentifier>{949dd37c-045d-40d3-8ac5-812274772734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\cpu">
+      <UniqueIdentifier>{43d7870c-2d2e-4bd1-888a-cfa169f6f191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\emulator">
+      <UniqueIdentifier>{681614f3-44bc-4aa6-b6a9-cee4dda81b48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\logging">
+      <UniqueIdentifier>{1e86abd1-f894-4b53-99d8-dfbb2cb231d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{97b31a5c-7347-4ca9-86e4-a507bdd8aa54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\clparser">
+      <UniqueIdentifier>{0834eaa5-2e8b-4c59-9300-fd55ca6c520e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\cpu">
+      <UniqueIdentifier>{2e469615-f443-4220-90e9-62290db84015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\emulator">
+      <UniqueIdentifier>{5d6a0e2e-76d1-4a9e-89ea-bf0c3629e6d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

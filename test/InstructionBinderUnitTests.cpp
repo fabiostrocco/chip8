@@ -1,8 +1,7 @@
+#include <cpu/InstructionBinder.hpp>
 #include <functional>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-
-#include "emulator/InstructionBinder.hpp"
 
 class BinderHandler
 {

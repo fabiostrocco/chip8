@@ -1,4 +1,4 @@
-#include "Timer.hpp"
+#include "cpu/Timer.hpp"
 
 void chip8::Timer::setValue(const uint8_t value)
 {

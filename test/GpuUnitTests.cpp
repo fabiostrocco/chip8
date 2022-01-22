@@ -1,11 +1,10 @@
+#include <cpu/Gpu.hpp>
 #include <functional>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <iostream>
+#include <logging/Logger.hpp>
 #include <sstream>
-
-#include "emulator/Gpu.hpp"
-#include "logging/Logger.hpp"
 
 class Logger : public logging::Logger
 {
@@ -152,7 +151,7 @@ namespace chip8::unit_tests
         ASSERT_FALSE(pixelErased);
     }
 
-     TEST(GpuUnitTests, SetSprite_EmptyFrameBufferWrapAround_CopyToFrameBufferCorrectly)
+    TEST(GpuUnitTests, SetSprite_EmptyFrameBufferWrapAround_CopyToFrameBufferCorrectly)
     {
         chip8::Gpu gpu(loggerForGpu);
 
@@ -163,7 +162,7 @@ namespace chip8::unit_tests
         const bool pixelErased = gpu.setSprite(gpu.getWidth() - 1, 0, sprite);
 
         const std::vector<bool>& frameBuffer = gpu.getFrameBuffer();
-        
+
         size_t lineStart = gpu.getWidth() - 1;
 
         ASSERT_TRUE(frameBuffer[lineStart]);

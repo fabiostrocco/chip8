@@ -17,7 +17,7 @@ Run (the first step may be skipped)
 
 Make sure you are using a C++ compiler supporting concepts. If not, try the following
 
->> cmake -D CMAKE_CXX_COMPILER=g++-10 
+>> cmake -D CMAKE_CXX_COMPILER=g++-11 
 
 # Testing
 

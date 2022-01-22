@@ -1,10 +1,9 @@
-#include "Cpu.hpp"
+#include "cpu/Cpu.hpp"
 
+#include <cpu/CpuExecutionException.hpp>
+#include <cpu/Font.hpp>
+#include <cpu/RomLoadFailureException.hpp>
 #include <functional>
-
-#include "CpuExecutionException.hpp"
-#include "Font.hpp"
-#include "RomLoadFailureException.hpp"
 
 chip8::Cpu::Cpu(const logging::Logger& logger, chip8::IGpu& gpu, chip8::ITimer& soundTimer, chip8::ITimer& delayTimer)
     : logger(logger)

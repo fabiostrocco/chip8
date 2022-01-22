@@ -1,10 +1,10 @@
 #pragma once
 
 #include <cstdint>
+#include <logging/Logger.hpp>
 #include <vector>
 
 #include "IGpu.hpp"
-#include "logging/Logger.hpp"
 
 namespace chip8
 {

@@ -36,8 +36,8 @@ namespace clparser
         // Unique pointers are ruled out too because copy constructor and assignments are deelted for Arguments, to make sure they
         // are not coped anywhere making original values out of sync. Revisit this in the future, maybe it is good to have copy
         // enabled and use reference wrappers and optional here.
-        std::vector<clparser::IArgument*> arguments; // this could be vector<IArgument&>
-        clparser::NamedArgument<bool>* helpArgument; // this could be optional<NamedArgument<bool>&>
+        std::vector<clparser::IArgument*> arguments;    // this could be vector<IArgument&>
+        clparser::NamedArgument<bool>* helpArgument;    // this could be optional<NamedArgument<bool>&>
         clparser::NamedArgument<bool>* versionArgument; // this could be optional<NamedArgument<bool>&>
 
         class HelpMessageBuilder : public clparser::IArgumentVisitor
@@ -49,9 +49,7 @@ namespace clparser
                                     const bool isFlag,
                                     const std::optional<std::string> defaultValue) override;
 
-            void visitPositionalArgument(const std::string& name,
-                                         const size_t position,
-                                         const std::optional<std::string> defaultValue) override;
+            void visitPositionalArgument(const std::string& name, const size_t position, const std::optional<std::string> defaultValue) override;
 
             std::string getArguments() const;
             std::string getOptionGuides() const;
@@ -70,9 +68,7 @@ namespace clparser
                                     const bool isFlag,
                                     const std::optional<std::string> defaultValue) override;
 
-            void visitPositionalArgument(const std::string& name,
-                                         const size_t position,
-                                         const std::optional<std::string> defaultValue) override;
+            void visitPositionalArgument(const std::string& name, const size_t position, const std::optional<std::string> defaultValue) override;
 
           private:
             bool hasAddedNamedArgument = false;

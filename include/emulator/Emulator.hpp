@@ -3,7 +3,6 @@
 #include <memory>
 #include <vector>
 
-#include "EmulatorWindow.hpp"
 #include "logging/Logger.hpp"
 
 namespace chip8
@@ -14,7 +13,7 @@ namespace chip8
         Emulator(const logging::Logger& logger, const std::string& romFileName);
         ~Emulator();
 
-        void run();
+        void run(const std::string& programName);
 
       private:
         Emulator(const Emulator&) = delete;

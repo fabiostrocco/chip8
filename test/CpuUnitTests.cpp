@@ -1,16 +1,15 @@
+#include <cpu/Cpu.hpp>
+#include <cpu/CpuExecutionException.hpp>
+#include <cpu/IGpu.hpp>
+#include <cpu/ITimer.hpp>
+#include <cpu/Registers.hpp>
 #include <functional>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <iostream>
+#include <logging/Logger.hpp>
 #include <sstream>
 #include <tuple>
-
-#include "emulator/Cpu.hpp"
-#include "emulator/CpuExecutionException.hpp"
-#include "emulator/IGpu.hpp"
-#include "emulator/ITimer.hpp"
-#include "emulator/Registers.hpp"
-#include "logging/Logger.hpp"
 
 class Gpu : public chip8::IGpu
 {

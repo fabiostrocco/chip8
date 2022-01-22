@@ -1,9 +1,8 @@
 #pragma once
 
 #include <SDL_keyboard.h>
+#include <cpu/Key.hpp>
 #include <unordered_map>
-
-#include "Key.hpp"
 
 namespace chip8
 {

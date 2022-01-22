@@ -9,8 +9,7 @@ namespace
     class is_streamable
     {
         template <typename StreamType1, typename ArgumentType1>
-        static constexpr auto test(int)
-            -> decltype(std::declval<StreamType1&>() << std::declval<ArgumentType1>(), bool())
+        static constexpr auto test(int) -> decltype(std::declval<StreamType1&>() << std::declval<ArgumentType1>(), bool())
         {
             return true;
         }
@@ -29,6 +28,5 @@ namespace
 namespace clparser
 {
     template <class ValueType>
-    concept ArgumentConcept = is_streamable<std::stringstream, ValueType>::value && !std::is_reference<ValueType>::value &&
-                              !std::is_pointer<ValueType>::value;
+    concept ArgumentConcept = is_streamable<std::stringstream, ValueType>::value && !std::is_reference<ValueType>::value && !std::is_pointer<ValueType>::value;
 }
