@@ -201,6 +201,7 @@
   <ItemGroup>
     <ClInclude Include="$(IncludeDir)$(CpuDir)Cpu.hpp" />
     <ClInclude Include="$(IncludeDir)$(CpuDir)CpuExecutionException.hpp" />
+    <ClInclude Include="$(IncludeDir)$(CpuDir)CpuState.hpp" />
     <ClInclude Include="$(IncludeDir)$(CpuDir)Font.hpp" />
     <ClInclude Include="$(IncludeDir)$(CpuDir)Gpu.hpp" />
     <ClInclude Include="$(IncludeDir)$(CpuDir)IGpu.hpp" />

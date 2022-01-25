@@ -15,21 +15,21 @@ chip8::Emulator::Emulator(const logging::Logger& logger, const std::string& romF
     : logger(logger)
     , romFileName(romFileName)
 {
-    logger.logDebug("Initializing SDL...");
+    logger.logInfo("Initializing SDL...");
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-    logger.logDebug("SDL initialized.");
+    logger.logInfo("SDL initialized.");
 }
 
 chip8::Emulator::~Emulator()
 {
-    logger.logDebug("Shutting down SDL...");
+    logger.logInfo("Shutting down SDL...");
     SDL_Quit();
-    logger.logDebug("SDL shut down...");
+    logger.logInfo("SDL shut down.");
 }
 
 #include "AudioController.hpp"
 
-void chip8::Emulator::run(const std::string& programName)
+void chip8::Emulator::run(const std::string& programName, const std::string& version, const uint32_t clock)
 {
     chip8::Gpu gpu(logger);
     chip8::Timer soundTimer;
@@ -39,7 +39,7 @@ void chip8::Emulator::run(const std::string& programName)
     std::unique_ptr<std::ifstream> romData = loadRom();
     cpu.boot(*romData);
 
-    chip8::EmulatorWindow window(logger, cpu, programName);
+    chip8::EmulatorWindow window(logger, cpu, programName, version, clock);
     window.run();
 }
 

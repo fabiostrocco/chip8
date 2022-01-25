@@ -6,6 +6,7 @@
 #include <memory>
 #include <random>
 
+#include "CpuState.hpp"
 #include "IGpu.hpp"
 #include "ITimer.hpp"
 #include "InstructionSet.hpp"
@@ -19,12 +20,13 @@ namespace chip8
       public:
         Cpu(const logging::Logger& logger, chip8::IGpu& gpu, chip8::ITimer& soundTimer, chip8::ITimer& delayTimer);
 
-        // TODO: probably remove ICpu
         void boot(std::istream& stream);
         void runClockCycle();
         void onKeyPressed(const chip8::Key key);
         void onKeyReleased(const chip8::Key key);
         bool shouldPlayAudio() const;
+        CpuState getCpuState() const;
+        void onDrawComplete();
 
         size_t getWidth() const;
         size_t getHeight() const;
@@ -55,6 +57,7 @@ namespace chip8
         // type (see C++ specifications).
         std::uniform_int_distribution<unsigned long> uniformDistrubution;
         bool playAudioFlag;
+        chip8::CpuState state;
 
         // ==================== Private utility functions ====================
       private:

@@ -15,12 +15,11 @@ void chip8::Timer::updateValue()
     auto millisecondsSinceLatestDecrement =
         std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - latestCounterDecrement).count();
 
-    // Timer clock tick
     if (millisecondsSinceLatestDecrement >= TickPeriod)
     {
         if (counter > 0)
         {
-            counter--;
+            counter -= millisecondsSinceLatestDecrement / TickPeriod;
         }
 
         latestCounterDecrement = std::chrono::system_clock::now();

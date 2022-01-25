@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
         logger.setVerbose(options.verbose());
 
         chip8::Emulator emulator(logger, options.romName());
-        emulator.run(chip8::metadata::ProgramName);
+        emulator.run(chip8::metadata::ProgramName, chip8::metadata::Version, options.clock());
     }
     catch (clparser::ArgumentNotFoundException& argNotFound)
     {

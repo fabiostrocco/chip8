@@ -11,15 +11,15 @@ namespace chip8
     class EmulatorWindow
     {
       public:
-        EmulatorWindow(const logging::Logger& logger, chip8::Cpu& cpu, const std::string& programName);
+        EmulatorWindow(const logging::Logger& logger, chip8::Cpu& cpu, const std::string& programName, const std::string& version, const uint32_t clock);
         ~EmulatorWindow();
 
         void run();
 
       private:
-        void init(const std::string& programName);
+        void init(const std::string& programName, const std::string& version);
         bool processEvents();
-        void loop();
+        void runCpuCycle();
         void clearRenderer();
         void drawFrame();
         void presentFrame();
@@ -30,6 +30,8 @@ namespace chip8
         EmulatorWindow& operator=(const EmulatorWindow&) = delete;
 
       private:
+        static constexpr uint32_t MinimumInstructionTimerPeriodMilliseconds = 10;
+
         const logging::Logger& logger;
         chip8::Cpu& cpu;
         chip8::AudioController audioController;
@@ -37,5 +39,8 @@ namespace chip8
         SDL_Window* window;
         SDL_Renderer* renderer;
         SDL_Texture* chip8ScreenTexture;
+
+        bool needsDraw;
+        uint32_t clock;
     };
 }

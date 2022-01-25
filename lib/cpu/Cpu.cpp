@@ -88,6 +88,7 @@ void chip8::Cpu::runClockCycle()
     soundTimer.updateValue();
     playAudioFlag = soundTimer.getValue() > 0;
 
+    state = CpuState::Running;
     instructions.matchInstruction(byte1, byte2);
 }
 
@@ -104,6 +105,16 @@ void chip8::Cpu::onKeyReleased(const chip8::Key key)
 bool chip8::Cpu::shouldPlayAudio() const
 {
     return playAudioFlag;
+}
+
+chip8::CpuState chip8::Cpu::getCpuState() const
+{
+    return state;
+}
+
+void chip8::Cpu::onDrawComplete()
+{
+    state = CpuState::Running;
 }
 
 size_t chip8::Cpu::getWidth() const
@@ -326,6 +337,7 @@ void chip8::Cpu::execute_drw_vx_vy_nibble(binding::MatchingPatternType Vx, bindi
     const size_t spriteEndLocation = registers.I + nibble;
     std::vector<uint8_t> sprite(memory.begin() + spriteStartLocation, memory.begin() + spriteEndLocation);
     registers.V[VF] = gpu.setSprite(registers.V[Vx], registers.V[Vy], sprite);
+    state = CpuState::WaitForDraw;
 }
 
 void chip8::Cpu::execute_skp_vx(binding::MatchingPatternType Vx)
@@ -369,6 +381,7 @@ void chip8::Cpu::execute_ld_vx_k(binding::MatchingPatternType Vx)
         {
             registers.V[Vx] = static_cast<uint8_t>(i);
             keyPressedStatus[i] = false;
+            state = CpuState::WaitForKey;
             return;
         }
     }

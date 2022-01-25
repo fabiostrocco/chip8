@@ -13,7 +13,7 @@ namespace chip8
         Emulator(const logging::Logger& logger, const std::string& romFileName);
         ~Emulator();
 
-        void run(const std::string& programName);
+        void run(const std::string& programName, const std::string& version, const uint32_t clock);
 
       private:
         Emulator(const Emulator&) = delete;

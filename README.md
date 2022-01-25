@@ -6,10 +6,11 @@ Open builds\vs\chip8.sln and build
 
 ## Linux
 
-Run (the first step may be skipped)
+Run (the first 2 steps may be skipped but they ensure you have gcc-11)
 
->> sudo apg-get update
->> sudo apt install cmake libsdl2-dev g++-10
+>> sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+>> sudo apt update
+>> sudo apt install cmake libsdl2-dev gcc-11
 >> cd builds/cmake
 >> cmake .
 >> make all

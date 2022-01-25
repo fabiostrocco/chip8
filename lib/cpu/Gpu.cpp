@@ -44,7 +44,7 @@ bool chip8::Gpu::setSprite(const size_t x, const size_t y, const std::vector<uin
     return anyPixelErased;
 }
 
-const std::vector<bool>& chip8::Gpu::getFrameBuffer()
+const std::vector<bool>& chip8::Gpu::getFrameBuffer() const
 {
     return frameBuffer;
 }

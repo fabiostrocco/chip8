@@ -15,7 +15,7 @@ namespace chip8
 
         void clear() override;
         bool setSprite(const size_t x, const size_t y, const std::vector<uint8_t>& sprite) override;
-        const std::vector<bool>& getFrameBuffer() override;
+        const std::vector<bool>& getFrameBuffer() const override;
 
         size_t getWidth() override;
         size_t getHeight() override;

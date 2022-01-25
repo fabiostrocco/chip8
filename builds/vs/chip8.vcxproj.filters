@@ -137,6 +137,9 @@
     <ClInclude Include="$(IncludeDir)$(EmulatorDir)AudioInitializationException.hpp">
       <Filter>include\emulator</Filter>
     </ClInclude>
+    <ClInclude Include="$(IncludeDir)$(CpuDir)CpuState.hpp">
+      <Filter>include\cpu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">

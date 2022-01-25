@@ -16,7 +16,7 @@ class Gpu : public chip8::IGpu
   public:
     MOCK_METHOD(void, clear, ());
     MOCK_METHOD(bool, setSprite, (const size_t x, const size_t y, const std::vector<uint8_t>& sprite));
-    MOCK_METHOD(const std::vector<bool>&, getFrameBuffer, ());
+    MOCK_METHOD(const std::vector<bool>&, getFrameBuffer, (), (const));
     MOCK_METHOD(size_t, getWidth, ());
     MOCK_METHOD(size_t, getHeight, ());
 };
