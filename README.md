@@ -8,7 +8,7 @@ Open builds\vs\chip8.sln and build
 
 Run (the first 2 steps may be skipped but they ensure you have gcc-11)
 
-```console
+```shell
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo apt update
 sudo apt install cmake libsdl2-dev gcc-11
@@ -20,7 +20,7 @@ make all
 
 Make sure you are using a C++ compiler supporting concepts. If not, try the following
 
-```console
+```shell
 cmake -D CMAKE_CXX_COMPILER=g++-11 
 ```
 
@@ -32,7 +32,7 @@ Open builds\vs\chip8.sln and run tests (ensure GoogleTest is installed in Visual
 
 ## Linux
 
-```console
+```shell
 cmake .
 make all
 ./chip8-test
